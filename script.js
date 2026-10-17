@@ -388,4 +388,236 @@ function qs(name) {
 /* ============================================================
    AUTO BOOT
    ============================================================ */
-document.addEventListener('DOMContentLoaded', initShell);
+document.addEventListener('DOMContentLoaded', async () => {
+  await initShell();
+  const page = currentPageFile();
+  if (page === 'products.html')   initProductsPage();
+  if (page === 'categories.html') initCategoriesPage();
+});
+
+/* ============================================================
+   PRODUCTS PAGE
+   ============================================================ */
+let PRODUCT_CACHE = [];
+let PRODUCT_ACTIVE_SWITCH = true;
+
+function initProductsPage() {
+  wireProductsUI();
+  loadProducts();
+}
+
+function wireProductsUI() {
+  const addBtn = document.getElementById('addProductBtn');
+  if (addBtn) addBtn.addEventListener('click', () => openProductModal());
+
+  const filter = document.getElementById('productFilter');
+  if (filter) filter.addEventListener('input', debounce(loadProducts, 300));
+
+  document.querySelectorAll('#productStatusTabs .date-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#productStatusTabs .date-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      loadProducts();
+    });
+  });
+
+  // Modal controls
+  const closeBtn  = document.getElementById('productModalClose');
+  const cancelBtn = document.getElementById('productModalCancel');
+  const saveBtn   = document.getElementById('productModalSave');
+  const overlay   = document.getElementById('productModal');
+  const activeSw  = document.getElementById('productActiveSwitch');
+
+  if (closeBtn)  closeBtn.addEventListener('click', closeProductModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeProductModal);
+  if (saveBtn)   saveBtn.addEventListener('click', saveProduct);
+
+  if (overlay) overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeProductModal();
+  });
+
+  if (activeSw) activeSw.addEventListener('click', () => {
+    activeSw.classList.toggle('on');
+    PRODUCT_ACTIVE_SWITCH = activeSw.classList.contains('on');
+  });
+
+  // Row actions (event delegation)
+  const tbody = document.getElementById('productsBody');
+  if (tbody) tbody.addEventListener('click', (e) => {
+    const editBtn  = e.target.closest('[data-action="edit"]');
+    const delBtn   = e.target.closest('[data-action="deactivate"]');
+    if (editBtn)   openProductModal(editBtn.dataset.pid);
+    if (delBtn)    deactivateProduct(delBtn.dataset.pid);
+  });
+}
+
+async function loadProducts() {
+  const search = document.getElementById('productFilter')?.value.trim() || '';
+  const activeTab = document.querySelector('#productStatusTabs .date-tab.active');
+  const status = activeTab?.dataset.status || 'all';
+
+  const params = new URLSearchParams();
+  if (status !== 'all') params.set('status', status);
+  if (search) params.set('q', search);
+
+  try {
+    const data = await api('/products?' + params.toString()).catch(() => null);
+    if (!data || !Array.isArray(data.products)) return;
+    PRODUCT_CACHE = data.products;
+    renderProductsTable(data.products);
+  } catch (e) {
+    // silent
+  }
+}
+
+function renderProductsTable(list) {
+  const tbody = document.getElementById('productsBody');
+  if (!tbody) return;
+
+  if (!list.length) {
+    tbody.innerHTML = `
+      <tr><td colspan="7" style="text-align:center;padding:32px;color:var(--text-muted);font-size:var(--fs-sm);">No products yet. Click "Add Product" to start.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(p => `
+    <tr>
+      <td>${escapeHtml(p.name || '')}</td>
+      <td>${escapeHtml(p.category || '—')}</td>
+      <td class="num">₹ ${formatCurrency(p.price || 0)}</td>
+      <td class="num">${p.taxRate != null ? p.taxRate : 0}%</td>
+      <td>${escapeHtml(p.unit || 'plate')}</td>
+      <td><span class="pill ${p.isActive === false ? 'inactive' : 'active'}">${p.isActive === false ? 'Inactive' : 'Active'}</span></td>
+      <td>
+        <div class="row-actions">
+          <button class="btn btn-icon" title="Edit" data-action="edit" data-pid="${escapeHtml(p.id || '')}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+          </button>
+          <button class="btn btn-icon" title="${p.isActive === false ? 'Activate' : 'Deactivate'}" data-action="deactivate" data-pid="${escapeHtml(p.id || '')}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function openProductModal(pid) {
+  const modal = document.getElementById('productModal');
+  const title = document.getElementById('productModalTitle');
+  const form  = document.getElementById('productForm');
+  const activeSw = document.getElementById('productActiveSwitch');
+
+  if (!modal) return;
+  if (form) form.reset();
+
+  if (pid) {
+    const p = PRODUCT_CACHE.find(x => x.id === pid);
+    if (!p) return;
+    if (title) title.textContent = 'Edit Product';
+    document.getElementById('productId').value       = p.id || '';
+    document.getElementById('productName').value     = p.name || '';
+    document.getElementById('productCategory').value = p.category || '';
+    document.getElementById('productUnit').value     = p.unit || 'plate';
+    document.getElementById('productPrice').value    = p.price != null ? (p.price / 100).toFixed(2) : '';
+    document.getElementById('productTax').value      = p.taxRate != null ? p.taxRate : 5;
+    document.getElementById('productDescription').value = p.description || '';
+
+    PRODUCT_ACTIVE_SWITCH = p.isActive !== false;
+  } else {
+    if (title) title.textContent = 'Add Product';
+    document.getElementById('productId').value = '';
+    PRODUCT_ACTIVE_SWITCH = true;
+  }
+
+  if (activeSw) activeSw.classList.toggle('on', PRODUCT_ACTIVE_SWITCH);
+  modal.removeAttribute('hidden');
+  setTimeout(() => document.getElementById('productName')?.focus(), 60);
+}
+
+function closeProductModal() {
+  const modal = document.getElementById('productModal');
+  if (modal) modal.setAttribute('hidden', '');
+}
+
+async function saveProduct() {
+  const name     = document.getElementById('productName')?.value.trim();
+  const category = document.getElementById('productCategory')?.value.trim();
+  const unit     = document.getElementById('productUnit')?.value || 'plate';
+  const priceRupees = parseFloat(document.getElementById('productPrice')?.value || '0');
+  const taxRate  = parseFloat(document.getElementById('productTax')?.value || '0');
+  const desc     = document.getElementById('productDescription')?.value.trim();
+  const id       = document.getElementById('productId')?.value || '';
+
+  if (!name) { toast('Product name is required'); return; }
+  if (!(priceRupees >= 0)) { toast('Enter a valid price'); return; }
+
+  const payload = {
+    name,
+    category: category || '',
+    unit,
+    price: Math.round(priceRupees * 100),
+    taxRate,
+    description: desc || '',
+    isActive: PRODUCT_ACTIVE_SWITCH
+  };
+
+  const saveBtn = document.getElementById('productModalSave');
+  if (saveBtn) saveBtn.disabled = true;
+
+  try {
+    if (id) {
+      await api('/products/' + encodeURIComponent(id), { method: 'PATCH', body: JSON.stringify(payload) });
+      toast('Product updated');
+    } else {
+      await api('/products', { method: 'POST', body: JSON.stringify(payload) });
+      toast('Product added');
+    }
+    closeProductModal();
+    loadProducts();
+  } catch (e) {
+    toast('Could not save product');
+  } finally {
+    if (saveBtn) saveBtn.disabled = false;
+  }
+}
+
+async function deactivateProduct(pid) {
+  if (!pid) return;
+  const p = PRODUCT_CACHE.find(x => x.id === pid);
+  if (!p) return;
+  const action = p.isActive === false ? 'activate' : 'deactivate';
+  if (!confirm(`Are you sure you want to ${action} this product?`)) return;
+
+  try {
+    await api('/products/' + encodeURIComponent(pid), {
+      method: 'PATCH',
+      body: JSON.stringify({ isActive: p.isActive === false })
+    });
+    toast('Product ' + (p.isActive === false ? 'activated' : 'deactivated'));
+    loadProducts();
+  } catch (e) {
+    toast('Could not update product');
+  }
+}
+
+/* ============================================================
+   CATEGORIES PAGE — placeholder (next file)
+   ============================================================ */
+function initCategoriesPage() {
+  // will be built next
+}
+
+/* ============================================================
+   DEBOUNCE (if not already present)
+   ============================================================ */
+if (typeof debounce === 'undefined') {
+  function debounce(fn, ms) {
+    let t;
+    return function () {
+      clearTimeout(t);
+      const args = arguments;
+      t = setTimeout(() => fn.apply(this, args), ms);
+    };
+  }
+}
