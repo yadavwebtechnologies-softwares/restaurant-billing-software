@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <div class="main">
+    <div class="content">
+
+      <!-- Page head -->
+      <div class="page-head">
+        <div>
+          <h2>Reports</h2>
+          <p>Sales analysis and business insights.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-outline" id="exportBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></svg>
+            Export CSV
+          </button>
+          <button class="btn btn-primary" id="printBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print Report
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filter-bar">
+        <div class="date-tabs" id="dateTabs">
+          <button class="date-tab" data-range="today">Today</button>
+          <button class="date-tab active" data-range="week">This Week</button>
+          <button class="date-tab" data-range="month">This Month</button>
+          <button class="date-tab" data-range="year">This Year</button>
+        </div>
+        <div class="date-range">
+          <span>Range:</span>
+          <span class="range-box" id="rangeStart"><span class="ph">[Start Date]</span></span>
+          <span>to</span>
+          <span class="range-box" id="rangeEnd"><span class="ph">[End Date]</span></span>
+        </div>
+      </div>
+
+      <!-- KPI cards -->
+      <section class="kpis">
+        <div class="kpi">
+          <div class="kpi-top">
+            <div class="kpi-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <span class="kpi-trend up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              <span class="ph">[%]</span>
+            </span>
+          </div>
+          <div class="kpi-label">Total Sales</div>
+          <div class="kpi-value" id="kpiTotalSales"><span class="ph">[Amount]</span></div>
+          <div class="kpi-sub">vs <span class="ph">[Prev]</span> previous period</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-top">
+            <div class="kpi-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+            </div>
+            <span class="kpi-trend up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              <span class="ph">[%]</span>
+            </span>
+          </div>
+          <div class="kpi-label">Total Orders</div>
+          <div class="kpi-value" id="kpiTotalOrders"><span class="ph">[Count]</span></div>
+          <div class="kpi-sub">across all payment modes</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-top">
+            <div class="kpi-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg>
+            </div>
+            <span class="kpi-trend down">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 17H9v-8"/></svg>
+              <span class="ph">[%]</span>
+            </span>
+          </div>
+          <div class="kpi-label">Average Bill</div>
+          <div class="kpi-value" id="kpiAvgBill"><span class="ph">[Avg]</span></div>
+          <div class="kpi-sub">per invoice</div>
+        </div>
+
+        <div class="kpi">
+          <div class="kpi-top">
+            <div class="kpi-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <span class="kpi-trend up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              <span class="ph">[%]</span>
+            </span>
+          </div>
+          <div class="kpi-label">Peak Hour</div>
+          <div class="kpi-value" id="kpiPeakHour"><span class="ph">[Time]</span></div>
+          <div class="kpi-sub"><span class="ph">[N]</span> orders avg</div>
+        </div>
+      </section>
+
+      <!-- Sales chart + payment split -->
+      <section class="row-2">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Sales Trend</h3>
+              <p>Daily revenue in selected range</p>
+            </div>
+            <div class="chart-legend">
+              <span class="legend-dot cur"><i></i> Current</span>
+              <span class="legend-dot prev"><i></i> Previous</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart" id="salesTrendChart">
+              <div class="chart-grid"><span></span><span></span><span></span><span></span></div>
+
+              <div class="chart-col">
+                <div class="chart-bars">
+                  <div class="bar" style="height:0%" data-tip="Mon · [amount]"></div>
+                  <div class="bar prev" style="height:0%" data-tip="Mon · [amount]"></div>
+                </div>
+                <div class="chart-day">Mon</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bars">
+                  <div class="bar" style="height:0%" data-tip="Tue · [amount]"></div>
+                  <div class="bar prev" style="height:0%" data-tip="Tue · [amount]"></div>
+                </div>
+                <div class="chart-day">Tue</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bars">
+                  <div class="bar" style="height:0%" data-tip="Wed · [amount]"></div>
+                  <div class="bar prev" style="height:0%" data-tip="Wed · [amount]"></div>
+                </div>
+                <div class="chart-day">Wed</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bars">
+                  <div class="bar" style="height:0%" data-tip="Thu · [amount]"></div>
+                  <div class="bar prev" style="height:0%" data-tip="Thu · [amount]"></div>
+                </div>
+                <div class="chart-day">Thu</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bars">
+                  <div class="bar" style="height:0%" data-tip="Fri · [amount]"></div>
+                  <div class="bar prev" style="height:0%" data-tip="Fri · [amount]"></div>
+                </div>
+                <div class="chart-day">Fri</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bars">
+                  <div class="bar" style="height:0%" data-tip="Sat · [amount]"></div>
+                  <div class="bar prev" style="height:0%" data-tip="Sat · [amount]"></div>
+                </div>
+                <div class="chart-day">Sat</div>
+              </div>
+              <div class="chart-col">
+                <div class="chart-bars">
+                  <div class="bar" style="height:0%" data-tip="Sun · [amount]"></div>
+                  <div class="bar prev" style="height:0%" data-tip="Sun · [amount]"></div>
+                </div>
+                <div class="chart-day">Sun</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Payment Split</h3>
+              <p>By collection method</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="split-bar" id="paymentSplitBar">
+              <div class="split-seg s1" style="width:52%"></div>
+              <div class="split-seg s2" style="width:34%"></div>
+              <div class="split-seg s3" style="width:14%"></div>
+            </div>
+            <div class="split-legend" id="paymentSplitLegend">
+              <div class="split-legend-item">
+                <div class="sl-left"><span class="sl-dot s1"></span><span class="sl-name">UPI</span></div>
+                <span class="sl-val"><span class="ph">[Amount]</span> · 52%</span>
+              </div>
+              <div class="split-legend-item">
+                <div class="sl-left"><span class="sl-dot s2"></span><span class="sl-name">Cash</span></div>
+                <span class="sl-val"><span class="ph">[Amount]</span> · 34%</span>
+              </div>
+              <div class="split-legend-item">
+                <div class="sl-left"><span class="sl-dot s3"></span><span class="sl-name">Card</span></div>
+                <span class="sl-val"><span class="ph">[Amount]</span> · 14%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Category + Monthly -->
+      <section class="row-2-even">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Revenue by Category</h3>
+              <p>Sales distribution</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="cat-list" id="categoryList">
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Category 1]</span></span><span class="cat-val"><span class="ph">[Amount]</span> · 32%</span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:92%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Category 2]</span></span><span class="cat-val"><span class="ph">[Amount]</span> · 28%</span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:82%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Category 3]</span></span><span class="cat-val"><span class="ph">[Amount]</span> · 18%</span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:60%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Category 4]</span></span><span class="cat-val"><span class="ph">[Amount]</span> · 12%</span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:42%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Others]</span></span><span class="cat-val"><span class="ph">[Amount]</span> · 10%</span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:34%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Monthly Trend</h3>
+              <p>Last 6 months</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="cat-list" id="monthlyList">
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Month 1]</span></span><span class="cat-val"><span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:58%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Month 2]</span></span><span class="cat-val"><span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:66%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Month 3]</span></span><span class="cat-val"><span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:72%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Month 4]</span></span><span class="cat-val"><span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:64%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Month 5]</span></span><span class="cat-val"><span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:84%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Month 6]</span></span><span class="cat-val"><span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:94%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hourly heatmap -->
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <h3>Hourly Sales Heatmap</h3>
+            <p>Average orders per hour</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="hourly" id="hourlyGrid">
+            <div class="hour-cell" title="8 AM">8</div>
+            <div class="hour-cell level-1" title="9 AM">9</div>
+            <div class="hour-cell level-2" title="10 AM">10</div>
+            <div class="hour-cell level-3" title="11 AM">11</div>
+            <div class="hour-cell level-4" title="12 PM">12</div>
+            <div class="hour-cell level-5" title="1 PM">1</div>
+            <div class="hour-cell level-4" title="2 PM">2</div>
+            <div class="hour-cell level-3" title="3 PM">3</div>
+            <div class="hour-cell level-2" title="4 PM">4</div>
+            <div class="hour-cell level-3" title="5 PM">5</div>
+            <div class="hour-cell level-4" title="6 PM">6</div>
+            <div class="hour-cell level-4" title="7 PM">7</div>
+          </div>
+          <div class="hour-labels">
+            <span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+          </div>
+          <div class="heatmap-foot">
+            <span>Peak: <strong id="peakHourLabel"><span class="ph">[Hour]</span></strong></span>
+            <span>Slow: <strong id="slowHourLabel"><span class="ph">[Hour]</span></strong></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Top products + key metrics -->
+      <section class="row-2-even">
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Top Selling Products</h3>
+              <p>By quantity sold</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="cat-list" id="topProductsList">
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Product Name]</span></span><span class="cat-val"><span class="ph">[Qty]</span> · <span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:92%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Product Name]</span></span><span class="cat-val"><span class="ph">[Qty]</span> · <span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:82%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Product Name]</span></span><span class="cat-val"><span class="ph">[Qty]</span> · <span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:76%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Product Name]</span></span><span class="cat-val"><span class="ph">[Qty]</span> · <span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:64%"></div></div>
+              </div>
+              <div class="cat-item">
+                <div class="cat-row"><span class="cat-name"><span class="ph">[Product Name]</span></span><span class="cat-val"><span class="ph">[Qty]</span> · <span class="ph">[Amount]</span></span></div>
+                <div class="cat-track"><div class="cat-fill" style="width:50%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>Key Metrics</h3>
+              <p>Comparison vs previous period</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="metric-grid single-col">
+              <div class="metric">
+                <div class="metric-label">Gross Margin</div>
+                <div class="metric-value" id="metricMargin"><span class="ph">[%]</span></div>
+                <div class="metric-delta up">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+                  <span class="ph">[+%]</span> vs previous
+                </div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">Repeat Customers</div>
+                <div class="metric-value" id="metricRepeat"><span class="ph">[%]</span></div>
+                <div class="metric-delta up">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+                  <span class="ph">[+%]</span> vs previous
+                </div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">Total Tax Collected</div>
+                <div class="metric-value" id="metricTax"><span class="ph">[Amount]</span></div>
+                <div class="metric-delta"><span class="ph">[N]</span> invoices</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Daily summary table -->
+      <section class="card">
+        <div class="card-head">
+          <div>
+            <h3>Daily Summary</h3>
+            <p>Breakdown by day</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th class="num">Orders</th>
+                <th class="num">Revenue</th>
+                <th class="num">Avg Bill</th>
+                <th class="num">Cash</th>
+                <th class="num">UPI</th>
+                <th class="num">Card</th>
+              </tr>
+            </thead>
+            <tbody id="dailySummaryBody">
+              <tr>
+                <td><span class="ph">[Date]</span></td>
+                <td class="num"><span class="ph">[N]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Avg]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+              </tr>
+              <tr>
+                <td><span class="ph">[Date]</span></td>
+                <td class="num"><span class="ph">[N]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Avg]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+              </tr>
+              <tr>
+                <td><span class="ph">[Date]</span></td>
+                <td class="num"><span class="ph">[N]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Avg]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+              </tr>
+              <tr>
+                <td><span class="ph">[Date]</span></td>
+                <td class="num"><span class="ph">[N]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Avg]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+              </tr>
+              <tr>
+                <td><span class="ph">[Date]</span></td>
+                <td class="num"><span class="ph">[N]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Avg]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+                <td class="num"><span class="ph">[Amount]</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="reports.js"></script>
+</body>
+</html>
