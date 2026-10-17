@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#202124">
+  <title>Invoice History | Restaurant Billing Software</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .history-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .history-header,
+    .history-toolbar,
+    .invoice-heading,
+    .invoice-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .history-header {
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .history-header h1 {
+      margin: 6px 0;
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 800;
+    }
+
+    .history-header p,
+    .invoice-meta,
+    .empty-state p {
+      color: var(--color-muted);
+      font-weight: 600;
+    }
+
+    .history-toolbar {
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding: 18px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-medium);
+    }
+
+    .search-field {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .search-field input,
+    .filter-field select {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-small);
+      background: var(--color-white);
+      color: var(--color-text);
+      font: inherit;
+      font-weight: 600;
+    }
+
+    .filter-field {
+      min-width: 160px;
+    }
+
+    .history-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .summary-card {
+      padding: 20px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-medium);
+    }
+
+    .summary-card span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--color-muted);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .summary-card strong {
+      font-size: 24px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .history-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .invoice-card {
+      padding: 20px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-medium);
+    }
+
+    .invoice-heading {
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .invoice-heading h2 {
+      margin: 0 0 6px;
+      font-size: 17px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .invoice-meta {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .invoice-total {
+      color: var(--color-green);
+      font-size: 21px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .invoice-details {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      padding: 16px 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .detail-item span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--color-muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .detail-item strong {
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .invoice-actions {
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .status-label {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 4px;
+      background: var(--color-soft-green);
+      color: var(--color-green);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 48px 20px;
+      text-align: center;
+      background: var(--color-white);
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-medium);
+    }
+
+    .empty-state h2 {
+      margin: 0 0 8px;
+      font-weight: 800;
+    }
+
+    .empty-state p {
+      margin: 0;
+    }
+
+    .demo-notice {
+      margin-bottom: 20px;
+      padding: 12px 14px;
+      border-left: 3px solid var(--color-orange);
+      background: var(--color-white);
+      color: var(--color-text);
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .history-page {
+        padding: 16px;
+      }
+
+      .history-summary {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .summary-card {
+        padding: 16px;
+      }
+
+      .invoice-details {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .history-toolbar {
+        align-items: stretch;
+      }
+
+      .filter-field {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .invoice-details {
+        grid-template-columns: 1fr;
+      }
+
+      .invoice-actions {
+        justify-content: stretch;
+      }
+
+      .invoice-actions .button {
+        flex: 1;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="history-page">
+    <header class="history-header">
+      <div>
+        <p class="eyebrow">BILLING MANAGEMENT</p>
+        <h1>Invoice History</h1>
+        <p>Search and review your previous invoices.</p>
+      </div>
+
+      <a class="button button-primary" href="billing.html">
+        Create Invoice
+      </a>
+    </header>
+
+    <div class="demo-notice">
+      Demo mode: These sample invoices are temporary. Real invoice history will be connected to Firebase in a later phase.
+    </div>
+
+    <section class="history-summary" aria-label="Invoice summary">
+      <article class="summary-card">
+        <span>Total Invoices</span>
+        <strong id="totalInvoices">0</strong>
+      </article>
+
+      <article class="summary-card">
+        <span>Total Billed</span>
+        <strong id="totalBilled">₹0.00</strong>
+      </article>
+
+      <article class="summary-card">
+        <span>Today's Invoices</span>
+        <strong id="todayInvoices">0</strong>
+      </article>
+    </section>
+
+    <section class="history-toolbar" aria-label="Search and filter invoices">
+      <div class="search-field">
+        <label for="invoiceSearch">Search invoices</label>
+        <input
+          type="search"
+          id="invoiceSearch"
+          placeholder="Invoice number or customer name"
+          autocomplete="off"
+        >
+      </div>
+
+      <div class="filter-field">
+        <label for="dateFilter">Date filter</label>
+        <select id="dateFilter">
+          <option value="all">All dates</option>
+          <option value="today">Today</option>
+          <option value="week">Last 7 days</option>
+        </select>
+      </div>
+
+      <div class="filter-field">
+        <label for="sortFilter">Sort by</label>
+        <select id="sortFilter">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="highest">Highest amount</option>
+          <option value="lowest">Lowest amount</option>
+        </select>
+      </div>
+    </section>
+
+    <section
+      class="history-list"
+      id="invoiceList"
+      aria-label="Invoice records"
+    ></section>
+
+    <section class="empty-state" id="emptyState" aria-live="polite">
+      <h2>No invoices found</h2>
+      <p>Try changing your search or date filter.</p>
+    </section>
+  </main>
+
+  <script>
+    "use strict";
+
+    // Temporary sample records. Firebase integration will replace these.
+    const demoInvoices = [
+      {
+        id: "DEMO-1004",
+        customer: "Rahul Sharma",
+        phone: "9876543210",
+        date: getTodayString(),
+        items: 3,
+        total: 420,
+        status: "Demo record"
+      },
+      {
+        id: "DEMO-1003",
+        customer: "Priya Das",
+        phone: "9876501234",
+        date: getDateOffset(-1),
+        items: 2,
+        total: 280,
+        status: "Demo record"
+      },
+      {
+        id: "DEMO-1002",
+        customer: "Amit Kumar",
+        phone: "9123456780",
+        date: getDateOffset(-3),
+        items: 4,
+        total: 650,
+        status: "Demo record"
+      },
+      {
+        id: "DEMO-1001",
+        customer: "Walk-in Customer",
+        phone: "",
+        date: getDateOffset(-6),
+        items: 1,
+        total: 120,
+        status: "Demo record"
+      }
+    ];
+
+    const invoiceList = document.getElementById("invoiceList");
+    const emptyState = document.getElementById("emptyState");
+    const searchInput = document.getElementById("invoiceSearch");
+    const dateFilter = document.getElementById("dateFilter");
+    const sortFilter = document.getElementById("sortFilter");
+
+    function getTodayString() {
+      return formatDate(new Date());
+    }
+
+    function getDateOffset(offset) {
+      const date = new Date();
+      date.setDate(date.getDate() + offset);
+      return formatDate(date);
+    }
+
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        minimumFractionDigits: 2
+      }).format(amount);
+    }
+
+    function displayDate(dateString) {
+      const parts = dateString.split("-").map(Number);
+      const date = new Date(parts[0], parts[1] - 1, parts[2]);
+
+      return date.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      });
+    }
+
+    function getFilteredInvoices() {
+      const query = searchInput.value.trim().toLowerCase();
+      const selectedDate = dateFilter.value;
+      const today = getTodayString();
+
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - 6);
+      const weekStart = formatDate(cutoff);
+
+      let invoices = demoInvoices.filter((invoice) => {
+        const matchesSearch =
+          invoice.id.toLowerCase().includes(query) ||
+          invoice.customer.toLowerCase().includes(query) ||
+          invoice.phone.includes(query);
+
+        let matchesDate = true;
+
+        if (selectedDate === "today") {
+          matchesDate = invoice.date === today;
+        } else if (selectedDate === "week") {
+          matchesDate =
+            invoice.date >= weekStart &&
+            invoice.date <= today;
+        }
+
+        return matchesSearch && matchesDate;
+      });
+
+      switch (sortFilter.value) {
+        case "oldest":
+          invoices.sort((a, b) => a.date.localeCompare(b.date));
+          break;
+        case "highest":
+          invoices.sort((a, b) => b.total - a.total);
+          break;
+        case "lowest":
+          invoices.sort((a, b) => a.total - b.total);
+          break;
+        default:
+          invoices.sort((a, b) => b.date.localeCompare(a.date));
+      }
+
+      return invoices;
+    }
+
+    function updateSummary() {
+      const today = getTodayString();
+
+      document.getElementById("totalInvoices").textContent =
+        demoInvoices.length;
+
+      document.getElementById("totalBilled").textContent =
+        formatCurrency(
+          demoInvoices.reduce((sum, invoice) => sum + invoice.total, 0)
+        );
+
+      document.getElementById("todayInvoices").textContent =
+        demoInvoices.filter((invoice) => invoice.date === today).length;
+    }
+
+    function createDetail(label, value) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "detail-item";
+
+      const labelElement = document.createElement("span");
+      labelElement.textContent = label;
+
+      const valueElement = document.createElement("strong");
+      valueElement.textContent = value;
+
+      wrapper.append(labelElement, valueElement);
+      return wrapper;
+    }
+
+    function renderInvoices() {
+      const invoices = getFilteredInvoices();
+      invoiceList.replaceChildren();
+
+      emptyState.style.display = invoices.length ? "none" : "block";
+
+      invoices.forEach((invoice) => {
+        const card = document.createElement("article");
+        card.className = "invoice-card";
+
+        const heading = document.createElement("div");
+        heading.className = "invoice-heading";
+
+        const headingInfo = document.createElement("div");
+        const title = document.createElement("h2");
+        title.textContent = invoice.id;
+
+        const meta = document.createElement("p");
+        meta.className = "invoice-meta";
+        meta.textContent = `Issued ${displayDate(invoice.date)}`;
+
+        const status = document.createElement("span");
+        status.className = "status-label";
+        status.textContent = invoice.status;
+
+        headingInfo.append(title, meta, status);
+
+        const total = document.createElement("strong");
+        total.className = "invoice-total";
+        total.textContent = formatCurrency(invoice.total);
+
+        heading.append(headingInfo, total);
+
+        const details = document.createElement("div");
+        details.className = "invoice-details";
+        details.append(
+          createDetail("Customer", invoice.customer),
+          createDetail("Phone", invoice.phone || "Not provided"),
+          createDetail("Items", String(invoice.items))
+        );
+
+        const actions = document.createElement("div");
+        actions.className = "invoice-actions";
+
+        const viewButton = document.createElement("button");
+        viewButton.type = "button";
+        viewButton.className = "button button-secondary";
+        viewButton.textContent = "View details";
+        viewButton.addEventListener("click", () => {
+          alert(
+            `Demo invoice: ${invoice.id}\n` +
+            `Customer: ${invoice.customer}\n` +
+            `Date: ${displayDate(invoice.date)}\n` +
+            `Items: ${invoice.items}\n` +
+            `Total: ${formatCurrency(invoice.total)}\n\n` +
+            "Full invoice details will be available after database integration."
+          );
+        });
+
+        actions.append(viewButton);
+        card.append(heading, details, actions);
+        invoiceList.append(card);
+      });
+    }
+
+    [searchInput, dateFilter, sortFilter].forEach((control) => {
+      control.addEventListener("input", renderInvoices);
+      control.addEventListener("change", renderInvoices);
+    });
+
+    updateSummary();
+    renderInvoices();
+  </script>
+</body>
+</html>
