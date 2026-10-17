@@ -1,729 +1,122 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#202124">
-  <title>Product Management | Restaurant Billing Software</title>
+  <meta name="description" content="Manage restaurant menu items and prices.">
+
+  <title>Menu Items | [Restaurant Name]</title>
+
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/buttons.css">
 
-  <style>
-    .products-page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px;
-    }
-
-    .page-header,
-    .toolbar,
-    .product-top,
-    .product-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .page-header {
-      flex-wrap: wrap;
-      margin-bottom: 26px;
-    }
-
-    .page-header h1 {
-      margin: 6px 0;
-      font-size: clamp(24px, 4vw, 32px);
-      font-weight: 800;
-    }
-
-    .page-header p,
-    .muted {
-      color: var(--color-muted);
-      font-weight: 600;
-    }
-
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-
-    .summary-card {
-      padding: 20px;
-      background: var(--color-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-medium);
-    }
-
-    .summary-card span {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--color-muted);
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .summary-card strong {
-      font-size: 25px;
-      font-weight: 800;
-    }
-
-    .toolbar {
-      flex-wrap: wrap;
-      padding: 18px;
-      margin-bottom: 20px;
-      background: var(--color-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-medium);
-    }
-
-    .search-box {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .search-box input,
-    .filter-box select,
-    .form-field input,
-    .form-field select {
-      width: 100%;
-      min-height: 42px;
-      padding: 10px 12px;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-small);
-      background: var(--color-white);
-      color: var(--color-text);
-      font: inherit;
-      font-weight: 600;
-    }
-
-    .filter-box {
-      min-width: 170px;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .product-card {
-      min-width: 0;
-      padding: 20px;
-      background: var(--color-white);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-medium);
-    }
-
-    .product-top {
-      align-items: flex-start;
-      margin-bottom: 18px;
-    }
-
-    .product-name {
-      margin: 0 0 7px;
-      font-size: 18px;
-      font-weight: 800;
-      overflow-wrap: anywhere;
-    }
-
-    .product-category {
-      color: var(--color-muted);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .product-price {
-      margin: 0 0 6px;
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    .product-status {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 4px;
-      background: var(--color-soft-green);
-      color: var(--color-green);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .product-actions {
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .product-actions .button {
-      flex: 1;
-      text-align: center;
-    }
-
-    .empty-state {
-      display: none;
-      padding: 40px 20px;
-      text-align: center;
-      background: var(--color-white);
-      border: 1px dashed var(--color-border);
-      border-radius: var(--radius-medium);
-    }
-
-    .empty-state h2 {
-      margin: 0 0 8px;
-      font-weight: 800;
-    }
-
-    .empty-state p {
-      color: var(--color-muted);
-      font-weight: 600;
-    }
-
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      background: rgba(32, 33, 36, 0.55);
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .product-modal {
-      width: 100%;
-      max-width: 480px;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 24px;
-      background: var(--color-white);
-      border-radius: var(--radius-medium);
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .modal-header h2 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 800;
-    }
-
-    .close-button {
-      min-width: 38px;
-      min-height: 38px;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-small);
-      background: var(--color-white);
-      color: var(--color-text);
-      font-size: 20px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .form-field {
-      margin-bottom: 16px;
-    }
-
-    .form-field label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: 700;
-    }
-
-    .form-error {
-      display: none;
-      margin-bottom: 14px;
-      color: #B42318;
-      font-weight: 600;
-      font-size: 13px;
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 22px;
-    }
-
-    .demo-notice {
-      margin-bottom: 20px;
-      padding: 12px 14px;
-      border-left: 3px solid var(--color-orange);
-      background: var(--color-white);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    @media (max-width: 900px) {
-      .products-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 650px) {
-      .products-page {
-        padding: 16px;
-      }
-
-      .summary-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .products-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .toolbar {
-        align-items: stretch;
-      }
-
-      .filter-box {
-        flex: 1;
-      }
-    }
-  </style>
+  <script src="js/products.js" defer></script>
 </head>
 
 <body>
-  <main class="products-page">
-    <header class="page-header">
-      <div>
-        <p class="eyebrow">INVENTORY MANAGEMENT</p>
-        <h1>Products and Menu</h1>
-        <p>Manage restaurant items and their billing prices.</p>
-      </div>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <a class="app-brand" href="dashboard.html">[Restaurant Name]</a>
 
-      <div>
-        <a class="button button-secondary" href="dashboard.html">Dashboard</a>
-        <button class="button button-primary" id="addProductButton" type="button">
-          Add Product
-        </button>
-      </div>
-    </header>
-
-    <div class="demo-notice">
-      Demo mode: Changes are stored only in this page's memory. Products will be connected to Firebase in a later phase.
+      <nav class="app-nav" aria-label="Main navigation">
+        <a href="billing.html">New Bill</a>
+        <a href="invoice-history.html">Bills</a>
+        <a href="products.html" aria-current="page">Menu Items</a>
+        <a href="settings.html">Settings</a>
+      </nav>
     </div>
+  </header>
 
-    <section class="summary-grid" aria-label="Product summary">
-      <article class="summary-card">
-        <span>Total Products</span>
-        <strong id="totalProducts">0</strong>
-      </article>
-
-      <article class="summary-card">
-        <span>Menu Categories</span>
-        <strong id="totalCategories">0</strong>
-      </article>
-
-      <article class="summary-card">
-        <span>Average Price</span>
-        <strong id="averagePrice">₹0.00</strong>
-      </article>
+  <main class="app-container">
+    <section class="page-header">
+      <h1>Menu Items</h1>
+      <p>Add your food items and set their prices.</p>
     </section>
 
-    <section class="toolbar" aria-label="Product search and filter">
-      <div class="search-box">
-        <label for="productSearch">Search products</label>
-        <input
-          id="productSearch"
-          type="search"
-          placeholder="Search by name or category"
-          autocomplete="off"
-        >
-      </div>
-
-      <div class="filter-box">
-        <label for="categoryFilter">Category</label>
-        <select id="categoryFilter">
-          <option value="all">All categories</option>
-        </select>
-      </div>
-    </section>
-
-    <section
-      class="products-grid"
-      id="productsGrid"
-      aria-label="Product list"
-    ></section>
-
-    <section class="empty-state" id="emptyState" aria-live="polite">
-      <h2>No products found</h2>
-      <p>Try another search or add a new product.</p>
-    </section>
-  </main>
-
-  <div
-    class="modal-backdrop"
-    id="productModal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modalTitle"
-  >
-    <section class="product-modal">
-      <div class="modal-header">
-        <h2 id="modalTitle">Add Product</h2>
-        <button
-          class="close-button"
-          id="closeModalButton"
-          type="button"
-          aria-label="Close form"
-        >×</button>
-      </div>
+    <section class="content-card section-spacing">
+      <h2>Add New Item</h2>
 
       <form id="productForm">
-        <div class="form-field">
-          <label for="productName">Product name</label>
+        <div class="bill-field">
+          <label for="productName">Item name</label>
           <input
             id="productName"
             name="productName"
             type="text"
-            maxlength="80"
-            placeholder="Example: Veg Thali"
+            maxlength="100"
+            placeholder="Example: Chicken Fried Rice"
             required
           >
         </div>
 
-        <div class="form-field">
-          <label for="productCategory">Category</label>
-          <input
-            id="productCategory"
-            name="productCategory"
-            type="text"
-            maxlength="50"
-            list="categorySuggestions"
-            placeholder="Example: Main Course"
-            required
-          >
-          <datalist id="categorySuggestions">
-            <option value="Main Course"></option>
-            <option value="Snacks"></option>
-            <option value="Beverages"></option>
-            <option value="Desserts"></option>
-          </datalist>
-        </div>
-
-        <div class="form-field">
+        <div class="bill-field">
           <label for="productPrice">Price (₹)</label>
           <input
             id="productPrice"
             name="productPrice"
             type="number"
             min="0.01"
-            max="10000000"
+            max="1000000"
             step="0.01"
-            placeholder="120.00"
+            placeholder="Enter selling price"
             required
           >
         </div>
 
-        <p class="form-error" id="formError" role="alert"></p>
+        <button class="btn btn-primary btn-block" type="submit">
+          Add Menu Item
+        </button>
 
-        <div class="modal-actions">
-          <button
-            class="button button-secondary"
-            id="cancelButton"
-            type="button"
-          >Cancel</button>
-
-          <button
-            class="button button-primary"
-            type="submit"
-          >Save Product</button>
-        </div>
+        <p id="productMessage" class="form-help" role="status"></p>
       </form>
     </section>
-  </div>
 
-  <script>
-    "use strict";
+    <section class="content-card section-spacing">
+      <h2>Your Menu</h2>
+      <p class="muted-text">These are the items currently listed on this page.</p>
 
-    let products = [
-      { id: 1, name: "Veg Thali", category: "Main Course", price: 120 },
-      { id: 2, name: "Masala Dosa", category: "Snacks", price: 90 },
-      { id: 3, name: "Fried Rice", category: "Main Course", price: 150 },
-      { id: 4, name: "Tea", category: "Beverages", price: 20 },
-      { id: 5, name: "Cold Coffee", category: "Beverages", price: 80 },
-      { id: 6, name: "Gulab Jamun", category: "Desserts", price: 50 }
-    ];
+      <div class="bill-field">
+        <label for="productSearch">Find an item</label>
+        <input
+          id="productSearch"
+          type="search"
+          placeholder="Search menu items"
+        >
+      </div>
 
-    let editingProductId = null;
-    let nextProductId = 7;
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Item Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
 
-    const productsGrid = document.getElementById("productsGrid");
-    const productModal = document.getElementById("productModal");
-    const productForm = document.getElementById("productForm");
-    const productSearch = document.getElementById("productSearch");
-    const categoryFilter = document.getElementById("categoryFilter");
-    const formError = document.getElementById("formError");
+          <tbody id="productList">
+            <tr>
+              <td colspan="3">Loading menu items...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    function formatCurrency(amount) {
-      return new Intl.NumberFormat("en-IN", {
-        style: "currency",
-        currency: "INR",
-        minimumFractionDigits: 2
-      }).format(amount);
-    }
+      <p class="bill-note">
+        Demo mode: items are not saved permanently yet.
+      </p>
+    </section>
 
-    function updateSummary() {
-      document.getElementById("totalProducts").textContent = products.length;
+    <section class="section-spacing">
+      <a class="btn btn-secondary btn-block" href="billing.html">
+        Go to Billing
+      </a>
+    </section>
 
-      const categories = new Set(
-        products.map(product => product.category.toLowerCase())
-      );
-
-      document.getElementById("totalCategories").textContent =
-        categories.size;
-
-      const average = products.length
-        ? products.reduce((sum, product) => sum + product.price, 0) / products.length
-        : 0;
-
-      document.getElementById("averagePrice").textContent =
-        formatCurrency(average);
-    }
-
-    function updateCategoryFilter() {
-      const selectedValue = categoryFilter.value;
-
-      const categories = [...new Set(
-        products.map(product => product.category)
-      )].sort((a, b) => a.localeCompare(b));
-
-      categoryFilter.replaceChildren();
-
-      const allOption = document.createElement("option");
-      allOption.value = "all";
-      allOption.textContent = "All categories";
-      categoryFilter.appendChild(allOption);
-
-      categories.forEach(category => {
-        const option = document.createElement("option");
-        option.value = category;
-        option.textContent = category;
-        categoryFilter.appendChild(option);
-      });
-
-      if (categories.includes(selectedValue)) {
-        categoryFilter.value = selectedValue;
-      }
-    }
-
-    function getFilteredProducts() {
-      const query = productSearch.value.trim().toLowerCase();
-      const selectedCategory = categoryFilter.value;
-
-      return products.filter(product => {
-        const matchesSearch =
-          product.name.toLowerCase().includes(query) ||
-          product.category.toLowerCase().includes(query);
-
-        const matchesCategory =
-          selectedCategory === "all" ||
-          product.category === selectedCategory;
-
-        return matchesSearch && matchesCategory;
-      }).sort((a, b) => a.name.localeCompare(b.name));
-    }
-
-    function createTextElement(tag, className, text) {
-      const element = document.createElement(tag);
-      element.className = className;
-      element.textContent = text;
-      return element;
-    }
-
-    function renderProducts() {
-      const filteredProducts = getFilteredProducts();
-
-      productsGrid.replaceChildren();
-      document.getElementById("emptyState").style.display =
-        filteredProducts.length ? "none" : "block";
-
-      filteredProducts.forEach(product => {
-        const card = document.createElement("article");
-        card.className = "product-card";
-
-        const top = document.createElement("div");
-        top.className = "product-top";
-
-        const information = document.createElement("div");
-        information.append(
-          createTextElement("h2", "product-name", product.name),
-          createTextElement("span", "product-category", product.category)
-        );
-
-        const status = createTextElement(
-          "span",
-          "product-status",
-          "Available"
-        );
-
-        top.append(information, status);
-
-        const price = createTextElement(
-          "p",
-          "product-price",
-          formatCurrency(product.price)
-        );
-
-        const priceCaption = createTextElement(
-          "p",
-          "muted",
-          "Selling price per item"
-        );
-
-        const actions = document.createElement("div");
-        actions.className = "product-actions";
-
-        const editButton = document.createElement("button");
-        editButton.type = "button";
-        editButton.className = "button button-secondary";
-        editButton.textContent = "Edit";
-        editButton.addEventListener("click", () => openEditForm(product.id));
-
-        const deleteButton = document.createElement("button");
-        deleteButton.type = "button";
-        deleteButton.className = "button button-secondary";
-        deleteButton.textContent = "Delete";
-        deleteButton.addEventListener("click", () => deleteProduct(product.id));
-
-        actions.append(editButton, deleteButton);
-        card.append(top, price, priceCaption, actions);
-        productsGrid.appendChild(card);
-      });
-
-      updateSummary();
-      updateCategoryFilter();
-    }
-
-    function openAddForm() {
-      editingProductId = null;
-      productForm.reset();
-      document.getElementById("modalTitle").textContent = "Add Product";
-      formError.style.display = "none";
-      productModal.classList.add("open");
-      document.getElementById("productName").focus();
-    }
-
-    function openEditForm(productId) {
-      const product = products.find(item => item.id === productId);
-      if (!product) return;
-
-      editingProductId = productId;
-
-      document.getElementById("modalTitle").textContent = "Edit Product";
-      document.getElementById("productName").value = product.name;
-      document.getElementById("productCategory").value = product.category;
-      document.getElementById("productPrice").value = product.price;
-
-      formError.style.display = "none";
-      productModal.classList.add("open");
-      document.getElementById("productName").focus();
-    }
-
-    function closeForm() {
-      productModal.classList.remove("open");
-      productForm.reset();
-      formError.style.display = "none";
-      editingProductId = null;
-    }
-
-    function deleteProduct(productId) {
-      const product = products.find(item => item.id === productId);
-      if (!product) return;
-
-      const confirmed = window.confirm(
-        `Delete "${product.name}" from the demo product list?`
-      );
-
-      if (!confirmed) return;
-
-      products = products.filter(item => item.id !== productId);
-      renderProducts();
-    }
-
-    productForm.addEventListener("submit", event => {
-      event.preventDefault();
-
-      const name = document.getElementById("productName").value.trim();
-      const category = document.getElementById("productCategory").value.trim();
-      const price = Number(document.getElementById("productPrice").value);
-
-      if (!name || !category || !Number.isFinite(price) || price <= 0) {
-        formError.textContent =
-          "Enter a product name, category, and valid price greater than zero.";
-        formError.style.display = "block";
-        return;
-      }
-
-      const duplicate = products.some(product =>
-        product.name.toLowerCase() === name.toLowerCase() &&
-        product.id !== editingProductId
-      );
-
-      if (duplicate) {
-        formError.textContent =
-          "A product with this name already exists. Please use a different name.";
-        formError.style.display = "block";
-        return;
-      }
-
-      if (editingProductId !== null) {
-        products = products.map(product =>
-          product.id === editingProductId
-            ? { ...product, name, category, price }
-            : product
-        );
-      } else {
-        products.push({
-          id: nextProductId++,
-          name,
-          category,
-          price
-        });
-      }
-
-      closeForm();
-      renderProducts();
-    });
-
-    document.getElementById("addProductButton")
-      .addEventListener("click", openAddForm);
-
-    document.getElementById("closeModalButton")
-      .addEventListener("click", closeForm);
-
-    document.getElementById("cancelButton")
-      .addEventListener("click", closeForm);
-
-    productModal.addEventListener("click", event => {
-      if (event.target === productModal) closeForm();
-    });
-
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && productModal.classList.contains("open")) {
-        closeForm();
-      }
-    });
-
-    productSearch.addEventListener("input", renderProducts);
-    categoryFilter.addEventListener("change", renderProducts);
-
-    renderProducts();
-  </script>
+    <footer class="home-footer">
+      <p>[Restaurant Name] · Billing System</p>
+    </footer>
+  </main>
 </body>
 </html>
