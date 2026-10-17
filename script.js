@@ -604,8 +604,200 @@ async function deactivateProduct(pid) {
 /* ============================================================
    CATEGORIES PAGE — placeholder (next file)
    ============================================================ */
+/* ============================================================
+   CATEGORIES PAGE
+   ============================================================ */
+let CATEGORY_CACHE = [];
+let CATEGORY_ACTIVE_SWITCH = true;
+
 function initCategoriesPage() {
-  // will be built next
+  wireCategoriesUI();
+  loadCategories();
+}
+
+function wireCategoriesUI() {
+  const addBtn = document.getElementById('addCategoryBtn');
+  if (addBtn) addBtn.addEventListener('click', () => openCategoryModal());
+
+  const filter = document.getElementById('categoryFilter');
+  if (filter) filter.addEventListener('input', debounce(loadCategories, 300));
+
+  document.querySelectorAll('#categoryStatusTabs .date-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#categoryStatusTabs .date-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      loadCategories();
+    });
+  });
+
+  const closeBtn  = document.getElementById('categoryModalClose');
+  const cancelBtn = document.getElementById('categoryModalCancel');
+  const saveBtn   = document.getElementById('categoryModalSave');
+  const overlay   = document.getElementById('categoryModal');
+  const activeSw  = document.getElementById('categoryActiveSwitch');
+
+  if (closeBtn)  closeBtn.addEventListener('click', closeCategoryModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeCategoryModal);
+  if (saveBtn)   saveBtn.addEventListener('click', saveCategory);
+
+  if (overlay) overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeCategoryModal();
+  });
+
+  if (activeSw) activeSw.addEventListener('click', () => {
+    activeSw.classList.toggle('on');
+    CATEGORY_ACTIVE_SWITCH = activeSw.classList.contains('on');
+  });
+
+  const tbody = document.getElementById('categoriesBody');
+  if (tbody) tbody.addEventListener('click', (e) => {
+    const editBtn = e.target.closest('[data-action="edit"]');
+    const delBtn  = e.target.closest('[data-action="deactivate"]');
+    if (editBtn) openCategoryModal(editBtn.dataset.cid);
+    if (delBtn)  toggleCategoryActive(delBtn.dataset.cid);
+  });
+}
+
+async function loadCategories() {
+  const search = document.getElementById('categoryFilter')?.value.trim() || '';
+  const activeTab = document.querySelector('#categoryStatusTabs .date-tab.active');
+  const status = activeTab?.dataset.status || 'all';
+
+  const params = new URLSearchParams();
+  if (status !== 'all') params.set('status', status);
+  if (search) params.set('q', search);
+
+  try {
+    const data = await api('/categories?' + params.toString()).catch(() => null);
+    if (!data || !Array.isArray(data.categories)) return;
+    CATEGORY_CACHE = data.categories;
+    renderCategoriesTable(data.categories);
+  } catch (e) {
+    // silent
+  }
+}
+
+function renderCategoriesTable(list) {
+  const tbody = document.getElementById('categoriesBody');
+  if (!tbody) return;
+
+  if (!list.length) {
+    tbody.innerHTML = `
+      <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--text-muted);font-size:var(--fs-sm);">No categories yet. Click "Add Category" to start.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(c => `
+    <tr>
+      <td><span class="order-num">${c.order != null ? c.order : 0}</span></td>
+      <td>${escapeHtml(c.name || '')}</td>
+      <td>${escapeHtml(c.description || '—')}</td>
+      <td class="num"><span class="cat-count">${c.productCount != null ? c.productCount : 0}</span></td>
+      <td><span class="pill ${c.isActive === false ? 'inactive' : 'active'}">${c.isActive === false ? 'Inactive' : 'Active'}</span></td>
+      <td>
+        <div class="row-actions">
+          <button class="btn btn-icon" title="Edit" data-action="edit" data-cid="${escapeHtml(c.id || '')}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+          </button>
+          <button class="btn btn-icon" title="${c.isActive === false ? 'Activate' : 'Deactivate'}" data-action="deactivate" data-cid="${escapeHtml(c.id || '')}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+          </button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function openCategoryModal(cid) {
+  const modal = document.getElementById('categoryModal');
+  const title = document.getElementById('categoryModalTitle');
+  const form  = document.getElementById('categoryForm');
+  const activeSw = document.getElementById('categoryActiveSwitch');
+
+  if (!modal) return;
+  if (form) form.reset();
+
+  if (cid) {
+    const c = CATEGORY_CACHE.find(x => x.id === cid);
+    if (!c) return;
+    if (title) title.textContent = 'Edit Category';
+    document.getElementById('categoryId').value          = c.id || '';
+    document.getElementById('categoryName').value        = c.name || '';
+    document.getElementById('categoryDescription').value = c.description || '';
+    document.getElementById('categoryOrder').value       = c.order != null ? c.order : 0;
+    CATEGORY_ACTIVE_SWITCH = c.isActive !== false;
+  } else {
+    if (title) title.textContent = 'Add Category';
+    document.getElementById('categoryId').value = '';
+    // default next order = max + 1
+    const maxOrder = CATEGORY_CACHE.reduce((m, x) => Math.max(m, x.order || 0), 0);
+    document.getElementById('categoryOrder').value = maxOrder + 1;
+    CATEGORY_ACTIVE_SWITCH = true;
+  }
+
+  if (activeSw) activeSw.classList.toggle('on', CATEGORY_ACTIVE_SWITCH);
+  modal.removeAttribute('hidden');
+  setTimeout(() => document.getElementById('categoryName')?.focus(), 60);
+}
+
+function closeCategoryModal() {
+  const modal = document.getElementById('categoryModal');
+  if (modal) modal.setAttribute('hidden', '');
+}
+
+async function saveCategory() {
+  const name  = document.getElementById('categoryName')?.value.trim();
+  const desc  = document.getElementById('categoryDescription')?.value.trim();
+  const order = parseInt(document.getElementById('categoryOrder')?.value || '0', 10);
+  const id    = document.getElementById('categoryId')?.value || '';
+
+  if (!name) { toast('Category name is required'); return; }
+  if (isNaN(order) || order < 0) { toast('Enter a valid display order'); return; }
+
+  const payload = {
+    name,
+    description: desc || '',
+    order,
+    isActive: CATEGORY_ACTIVE_SWITCH
+  };
+
+  const saveBtn = document.getElementById('categoryModalSave');
+  if (saveBtn) saveBtn.disabled = true;
+
+  try {
+    if (id) {
+      await api('/categories/' + encodeURIComponent(id), { method: 'PATCH', body: JSON.stringify(payload) });
+      toast('Category updated');
+    } else {
+      await api('/categories', { method: 'POST', body: JSON.stringify(payload) });
+      toast('Category added');
+    }
+    closeCategoryModal();
+    loadCategories();
+  } catch (e) {
+    toast('Could not save category');
+  } finally {
+    if (saveBtn) saveBtn.disabled = false;
+  }
+}
+
+async function toggleCategoryActive(cid) {
+  if (!cid) return;
+  const c = CATEGORY_CACHE.find(x => x.id === cid);
+  if (!c) return;
+  const action = c.isActive === false ? 'activate' : 'deactivate';
+  if (!confirm(`Are you sure you want to ${action} this category?`)) return;
+
+  try {
+    await api('/categories/' + encodeURIComponent(cid), {
+      method: 'PATCH',
+      body: JSON.stringify({ isActive: c.isActive === false })
+    });
+    toast('Category ' + (c.isActive === false ? 'activated' : 'deactivated'));
+    loadCategories();
+  } catch (e) {
+    toast('Could not update category');
+  }
 }
 
 /* ============================================================
