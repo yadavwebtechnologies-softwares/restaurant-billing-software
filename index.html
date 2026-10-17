@@ -5,286 +5,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#202124">
-  <meta name="description" content="Simple, professional restaurant billing and invoice management software for your business.">
+  <meta name="description" content="Simple restaurant billing and invoice management.">
 
-  <title>Restaurant Billing Software | Yadav Web Technologies</title>
+  <title>[Restaurant Name] | Billing</title>
 
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/buttons.css">
 </head>
+
 <body>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <a class="app-brand" href="index.html">[Restaurant Name]</a>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="brand" aria-label="Home">
-        <span class="brand-mark">Y</span>
-        <span class="brand-name">Yadav Web Technologies</span>
-      </a>
-
-      <nav class="main-nav" aria-label="Main navigation">
-        <a href="#features">Features</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#contact">Contact</a>
+      <nav class="app-nav" aria-label="Main navigation">
+        <a href="billing.html">New Bill</a>
+        <a href="invoice-history.html">Bills</a>
+        <a href="products.html">Menu Items</a>
+        <a href="settings.html">Settings</a>
       </nav>
-
-      <a href="login.html" class="button button-primary header-action">
-        Login
-      </a>
     </div>
   </header>
 
-  <main>
-    <section class="hero-section">
-      <div class="container hero-grid">
+  <main class="app-container home-page">
+    <section class="home-welcome">
+      <p class="home-eyebrow">BILLING HOME</p>
 
-        <div class="hero-content">
-          <span class="eyebrow">BILLING MADE SIMPLE</span>
+      <h1>Welcome to [Restaurant Name]</h1>
 
-          <h1>
-            Manage Your Restaurant Billing
-            <span class="text-accent">With Confidence.</span>
-          </h1>
+      <p>
+        Create customer bills, print invoices and manage your menu
+        from one simple place.
+      </p>
 
-          <p class="hero-description">
-            Create invoices, manage products, track billing activity and
-            organise your restaurant business from one simple dashboard.
-          </p>
-
-          <div class="hero-actions">
-            <a href="login.html" class="button button-primary">
-              Get Started
-            </a>
-            <a href="#features" class="button button-secondary">
-              Explore Features
-            </a>
-          </div>
-
-          <div class="hero-trust">
-            <span class="trust-indicator"></span>
-            <p>Designed for everyday business operations</p>
-          </div>
-        </div>
-
-        <div class="hero-preview">
-          <div class="preview-window">
-
-            <div class="preview-topbar">
-              <div class="preview-brand">
-                <span class="preview-brand-mark">A</span>
-                <div>
-                  <strong>ABC Restaurant</strong>
-                  <span>Billing Dashboard</span>
-                </div>
-              </div>
-              <span class="preview-status">Demo Preview</span>
-            </div>
-
-            <div class="preview-body">
-              <div class="preview-heading">
-                <div>
-                  <span class="preview-label">BUSINESS OVERVIEW</span>
-                  <h2>Today's Summary</h2>
-                </div>
-                <span class="preview-date">Sample Data</span>
-              </div>
-
-              <div class="preview-stats">
-                <div class="preview-stat">
-                  <span>Total Sales</span>
-                  <strong>₹12,450</strong>
-                  <small class="stat-positive">Demo amount</small>
-                </div>
-
-                <div class="preview-stat">
-                  <span>Invoices</span>
-                  <strong>28</strong>
-                  <small>Sample count</small>
-                </div>
-              </div>
-
-              <div class="preview-invoices">
-                <div class="preview-invoices-heading">
-                  <strong>Recent Invoices</strong>
-                  <span>Sample</span>
-                </div>
-
-                <div class="preview-invoice-row">
-                  <div>
-                    <strong>INV-1001</strong>
-                    <span>Customer A</span>
-                  </div>
-                  <strong>₹850</strong>
-                  <span class="invoice-paid">Paid</span>
-                </div>
-
-                <div class="preview-invoice-row">
-                  <div>
-                    <strong>INV-1002</strong>
-                    <span>Customer B</span>
-                  </div>
-                  <strong>₹1,250</strong>
-                  <span class="invoice-pending">Pending</span>
-                </div>
-
-                <div class="preview-invoice-row">
-                  <div>
-                    <strong>INV-1003</strong>
-                    <span>Customer C</span>
-                  </div>
-                  <strong>₹620</strong>
-                  <span class="invoice-paid">Paid</span>
-                </div>
-              </div>
-
-              <p class="preview-disclaimer">
-                Illustrative demo data. Not connected to a real database.
-              </p>
-            </div>
-          </div>
-
-          <div class="preview-note">
-            <span class="note-mark">A4</span>
-            <div>
-              <strong>Professional Invoices</strong>
-              <p>Designed for clean, printable billing documents.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <a class="btn btn-primary home-main-action" href="billing.html">
+        + Create New Bill
+      </a>
     </section>
 
-    <section class="features-section section-padding" id="features">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">BUILT FOR YOUR WORKFLOW</span>
-          <h2>Everything You Need for Daily Billing</h2>
-          <p>
-            Keep essential billing tasks organised with a clear,
-            easy-to-use interface.
-          </p>
-        </div>
+    <section class="home-actions" aria-labelledby="quick-actions-heading">
+      <h2 id="quick-actions-heading">Quick Actions</h2>
 
-        <div class="features-grid">
-          <article class="feature-card">
-            <span class="feature-number">01</span>
-            <h3>Quick Billing</h3>
-            <p>
-              Select saved products, enter quantities and calculate
-              invoice totals efficiently.
-            </p>
-          </article>
+      <div class="home-action-list">
+        <a class="home-action-card" href="billing.html">
+          <span class="home-action-title">New Bill</span>
+          <span class="home-action-description">
+            Add food items and generate a customer invoice.
+          </span>
+          <span class="home-action-link">Create bill →</span>
+        </a>
 
-          <article class="feature-card">
-            <span class="feature-number">02</span>
-            <h3>Product Management</h3>
-            <p>
-              Maintain your product list and saved prices for faster
-              invoice preparation.
-            </p>
-          </article>
+        <a class="home-action-card" href="invoice-history.html">
+          <span class="home-action-title">Previous Bills</span>
+          <span class="home-action-description">
+            Find and review previous invoices.
+          </span>
+          <span class="home-action-link">View bills →</span>
+        </a>
 
-          <article class="feature-card">
-            <span class="feature-number">03</span>
-            <h3>Invoice History</h3>
-            <p>
-              Access previous invoices in a dedicated section when
-              database integration is complete.
-            </p>
-          </article>
+        <a class="home-action-card" href="products.html">
+          <span class="home-action-title">Menu Items</span>
+          <span class="home-action-description">
+            Manage food items and their prices.
+          </span>
+          <span class="home-action-link">Manage menu →</span>
+        </a>
 
-          <article class="feature-card">
-            <span class="feature-number">04</span>
-            <h3>Printable A4 Invoices</h3>
-            <p>
-              Prepare professional invoices with business details,
-              customer information and itemised totals.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="workflow-section section-padding" id="how-it-works">
-      <div class="container workflow-grid">
-        <div class="workflow-content">
-          <span class="eyebrow">A SIMPLE WORKFLOW</span>
-          <h2>From Product Selection to Invoice</h2>
-          <p>
-            The planned workflow keeps everyday billing straightforward,
-            from adding products to preparing a final invoice.
-          </p>
-        </div>
-
-        <div class="workflow-steps">
-          <div class="workflow-step">
-            <span class="step-number">1</span>
-            <div>
-              <h3>Set Up Your Business</h3>
-              <p>Add your business name, logo and billing preferences.</p>
-            </div>
-          </div>
-
-          <div class="workflow-step">
-            <span class="step-number">2</span>
-            <div>
-              <h3>Add Products</h3>
-              <p>Save product names and prices for quick selection.</p>
-            </div>
-          </div>
-
-          <div class="workflow-step">
-            <span class="step-number">3</span>
-            <div>
-              <h3>Create an Invoice</h3>
-              <p>Enter customer and item details, then review the total.</p>
-            </div>
-          </div>
-
-          <div class="workflow-step">
-            <span class="step-number">4</span>
-            <div>
-              <h3>Print and Track</h3>
-              <p>Prepare an invoice and access saved records after integration.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-section" id="contact">
-      <div class="container cta-inner">
-        <div>
-          <span class="eyebrow">READY TO GET ORGANISED?</span>
-          <h2>Make Daily Billing Simpler.</h2>
-          <p>
-            Start with the dashboard and explore the planned billing workflow.
-          </p>
-        </div>
-
-        <a href="login.html" class="button button-light">
-          Open Login
+        <a class="home-action-card" href="settings.html">
+          <span class="home-action-title">Business Settings</span>
+          <span class="home-action-description">
+            Set your restaurant details and invoice preferences.
+          </span>
+          <span class="home-action-link">Open settings →</span>
         </a>
       </div>
     </section>
+
+    <footer class="home-footer">
+      <p>[Restaurant Name] · Billing System</p>
+    </footer>
   </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <a href="index.html" class="footer-brand">Yadav Web Technologies</a>
-      <p>
-        Restaurant Billing and Invoice Software
-      </p>
-      <p class="footer-copyright">
-        Copyright &copy; <span id="current-year">2026</span>
-        Yadav Web Technologies. All rights reserved.
-      </p>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById("current-year").textContent =
-      new Date().getFullYear();
-  </script>
-
 </body>
 </html>
