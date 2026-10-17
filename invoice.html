@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invoice</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page-chrome">
+  <div class="invoice-page">
+
+    <div class="inv-watermark" id="invWatermark" hidden>PAID</div>
+
+    <!-- HEADER -->
+    <header class="inv-header">
+      <div class="inv-logo" id="invLogo">B</div>
+      <div class="inv-biz-name" id="invBizName"><span class="ph">[Business Name]</span></div>
+      <div class="inv-biz-tag" id="invBizTag"><span class="ph">[Tagline]</span></div>
+      <div class="inv-biz-meta" id="invBizMeta">
+        <span class="ph">[Address]</span><br>
+        <span class="ph">[Phone]</span> · <span class="ph">[Email]</span> · <span class="ph">[Website]</span>
+      </div>
+    </header>
+
+    <!-- DOCUMENT BAR -->
+    <div class="inv-doc-bar">
+      <div class="inv-doc-side left">
+        <div class="inv-doc-side-label">Invoice No</div>
+        <div class="inv-doc-side-value" id="invNumber"><span class="ph">[INV-Number]</span></div>
+      </div>
+      <div class="inv-doc-title-wrap">
+        <div class="inv-doc-title" id="invTitle">INVOICE</div>
+      </div>
+      <div class="inv-doc-side right">
+        <div class="inv-doc-side-label">Date</div>
+        <div class="inv-doc-side-value" id="invDate"><span class="ph">[Date]</span></div>
+        <div class="inv-doc-side-sub" id="invTime"><span class="ph">[Time]</span></div>
+      </div>
+    </div>
+
+    <!-- PARTIES -->
+    <div class="inv-parties">
+      <div>
+        <div class="inv-label">Bill To</div>
+        <div class="inv-value" id="invCustomerName"><span class="ph">[Customer]</span></div>
+        <div class="inv-value-sub" id="invCustomerPhone"><span class="ph">[Phone]</span></div>
+      </div>
+      <div style="text-align:right;">
+        <div class="inv-label" id="invTableLabel">Table</div>
+        <div class="inv-value" id="invTable"><span class="ph">[Table]</span></div>
+        <div class="inv-value-sub" id="invTaxDetail">
+          <span class="setting-tax-detail" data-setting="showTaxDetails" hidden>
+            GSTIN: <span id="invGSTIN"><span class="ph">[GSTIN]</span></span> ·
+          </span>
+          FSSAI: <span id="invFSSAI"><span class="ph">[FSSAI]</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEMS -->
+    <div class="inv-items">
+      <div class="inv-items-head">
+        <span>#</span>
+        <span>Item</span>
+        <span>Qty</span>
+        <span>Rate</span>
+        <span>Amount</span>
+      </div>
+      <div id="invItemsBody">
+        <!-- rows injected by print-export.js -->
+      </div>
+    </div>
+
+    <!-- PAYMENT → TOTALS → QR -->
+    <div class="inv-bottom">
+
+      <div class="inv-payment-block" id="invPaymentBlock">
+        <div class="inv-payment-row">
+          <span>Payment Method</span>
+          <strong id="invPaymentMethod"><span class="ph">[Mode]</span></strong>
+        </div>
+        <div class="inv-payment-row">
+          <span>Payment Status</span>
+          <strong id="invPaymentStatus"><span class="ph">[Status]</span></strong>
+        </div>
+      </div>
+
+      <div class="inv-totals">
+        <div class="inv-total-row">
+          <span>Subtotal</span>
+          <span id="invSubtotal"><span class="ph">[Amount]</span></span>
+        </div>
+
+        <div class="inv-total-row" id="invDiscountRow">
+          <span>Discount</span>
+          <span id="invDiscount"><span class="ph">[-Amount]</span></span>
+        </div>
+
+        <div class="inv-total-row" id="invTaxRow" hidden>
+          <span>Tax</span>
+          <span id="invTax"><span class="ph">[Amount]</span></span>
+        </div>
+
+        <div class="inv-total-row">
+          <span>Round Off</span>
+          <span id="invRoundOff">0.00</span>
+        </div>
+
+        <div class="inv-total-divider"></div>
+
+        <div class="inv-grand">
+          <span>Grand Total</span>
+          <span id="invGrandTotal"><span class="ph">[Amount]</span></span>
+        </div>
+      </div>
+
+      <div class="inv-qr-block">
+        <div class="inv-qr" id="invQR">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <path d="M14 14h3v3M20 14v.01M14 20h.01M17 20h3v-3M20 20v.01"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="inv-footer">
+      <div class="inv-footer-divider"></div>
+      <div class="inv-footer-grid">
+        <div>
+          <div class="inv-thanks" id="invThanks"><span class="ph">[Thank You]</span></div>
+          <div class="inv-terms" id="invTerms">
+            <span class="ph">[Terms Line 1]</span> <span class="ph">[Terms Line 2]</span>
+          </div>
+        </div>
+        <div class="inv-signature">
+          <div class="inv-signature-line"></div>
+          <div class="inv-signature-label" id="invSignatory">Authorised Signatory</div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<div class="chrome-bar no-print">
+  <button class="btn btn-outline" id="backBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back
+  </button>
+  <button class="btn btn-primary" id="printBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Print / Save PDF
+  </button>
+</div>
+
+<script src="script.js"></script>
+<script src="print-export.js"></script>
+</body>
+</html>
