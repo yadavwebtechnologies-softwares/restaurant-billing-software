@@ -1,89 +1,113 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#202124">
-  <meta name="description" content="Simple restaurant billing and invoice management.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
 
-  <title>[Restaurant Name] | Billing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="style.css">
 </head>
+<body class="auth-body">
 
-<body>
-  <header class="app-header">
-    <div class="app-header-inner">
-      <a class="app-brand" href="index.html">[Restaurant Name]</a>
+  <div class="auth-shell">
 
-      <nav class="app-nav" aria-label="Main navigation">
-        <a href="billing.html">New Bill</a>
-        <a href="invoice-history.html">Bills</a>
-        <a href="products.html">Menu Items</a>
-        <a href="settings.html">Settings</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="app-container home-page">
-    <section class="home-welcome">
-      <p class="home-eyebrow">BILLING HOME</p>
-
-      <h1>Welcome to [Restaurant Name]</h1>
-
-      <p>
-        Create customer bills, print invoices and manage your menu
-        from one simple place.
-      </p>
-
-      <a class="btn btn-primary home-main-action" href="billing.html">
-        + Create New Bill
-      </a>
-    </section>
-
-    <section class="home-actions" aria-labelledby="quick-actions-heading">
-      <h2 id="quick-actions-heading">Quick Actions</h2>
-
-      <div class="home-action-list">
-        <a class="home-action-card" href="billing.html">
-          <span class="home-action-title">New Bill</span>
-          <span class="home-action-description">
-            Add food items and generate a customer invoice.
-          </span>
-          <span class="home-action-link">Create bill →</span>
-        </a>
-
-        <a class="home-action-card" href="invoice-history.html">
-          <span class="home-action-title">Previous Bills</span>
-          <span class="home-action-description">
-            Find and review previous invoices.
-          </span>
-          <span class="home-action-link">View bills →</span>
-        </a>
-
-        <a class="home-action-card" href="products.html">
-          <span class="home-action-title">Menu Items</span>
-          <span class="home-action-description">
-            Manage food items and their prices.
-          </span>
-          <span class="home-action-link">Manage menu →</span>
-        </a>
-
-        <a class="home-action-card" href="settings.html">
-          <span class="home-action-title">Business Settings</span>
-          <span class="home-action-description">
-            Set your restaurant details and invoice preferences.
-          </span>
-          <span class="home-action-link">Open settings →</span>
-        </a>
+    <!-- LEFT: Brand panel -->
+    <div class="auth-brand">
+      <div class="auth-brand-inner">
+        <div class="auth-mark">B</div>
+        <h1 class="auth-brand-title"><span class="ph" data-setting="businessName">[Business Name]</span></h1>
+        <p class="auth-brand-tag"><span class="ph" data-setting="tagline">[Tagline]</span></p>
+        <p class="auth-brand-sub">
+          Restaurant billing, invoicing, and reports — all in one place.
+        </p>
+        <ul class="auth-features">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Generate GST-ready invoices in seconds
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Track sales, payments, and top products
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Print or save A4 invoices instantly
+          </li>
+        </ul>
       </div>
-    </section>
+      <div class="auth-brand-foot">
+        <span><span class="ph" data-setting="businessName">[Business Name]</span> · v1.0</span>
+      </div>
+    </div>
 
-    <footer class="home-footer">
-      <p>[Restaurant Name] · Billing System</p>
-    </footer>
-  </main>
+    <!-- RIGHT: Login form -->
+    <div class="auth-form-panel">
+      <div class="auth-form-card">
+
+        <div class="auth-form-head">
+          <h2>Sign in</h2>
+          <p>Welcome back. Please enter your details.</p>
+        </div>
+
+        <form id="loginForm" class="auth-form" novalidate>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              class="input"
+              placeholder="owner@restaurant.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="password">
+              Password
+              <a href="#" class="auth-link" id="forgotLink">Forgot?</a>
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              class="input"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <div class="auth-row">
+            <label class="auth-checkbox">
+              <input type="checkbox" id="remember" />
+              <span>Remember me</span>
+            </label>
+          </div>
+
+          <div class="auth-msg" id="authMsg" hidden></div>
+
+          <button type="submit" class="btn btn-primary auth-submit" id="loginBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5M15 12H3"/></svg>
+            Sign in
+          </button>
+        </form>
+
+        <div class="auth-form-foot">
+          <span>Secured by Firebase Authentication</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script src="login.js"></script>
 </body>
 </html>
