@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#202124">
+  <title>Business Settings | Restaurant Billing Software</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .settings-page {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .page-header h1 {
+      margin: 6px 0;
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 800;
+    }
+
+    .page-header p,
+    .section-description {
+      color: var(--color-muted);
+      font-weight: 600;
+    }
+
+    .demo-notice {
+      margin-bottom: 22px;
+      padding: 12px 14px;
+      border-left: 3px solid var(--color-orange);
+      background: var(--color-white);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .settings-layout {
+      display: grid;
+      gap: 20px;
+    }
+
+    .settings-section {
+      padding: 24px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-medium);
+    }
+
+    .section-heading {
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 7px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .section-description {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .form-field {
+      min-width: 0;
+    }
+
+    .form-field.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 700;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-small);
+      background: var(--color-white);
+      color: var(--color-text);
+      font: inherit;
+      font-weight: 600;
+    }
+
+    .form-field textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .field-help {
+      display: block;
+      margin-top: 6px;
+      color: var(--color-muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .setting-row:last-child {
+      border-bottom: 0;
+    }
+
+    .setting-row h3 {
+      margin: 0 0 5px;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .setting-row p {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .setting-row input[type="checkbox"] {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+      accent-color: var(--color-green);
+      cursor: pointer;
+    }
+
+    .settings-actions {
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .feedback-message {
+      display: none;
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: var(--radius-small);
+      background: var(--color-soft-green);
+      color: var(--color-green);
+      font-weight: 700;
+    }
+
+    .danger-section {
+      border-color: #E8B8B3;
+    }
+
+    .danger-section h2 {
+      color: #B42318;
+    }
+
+    @media (max-width: 650px) {
+      .settings-page {
+        padding: 16px;
+      }
+
+      .settings-section {
+        padding: 18px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-field.full-width {
+        grid-column: auto;
+      }
+
+      .setting-row {
+        align-items: flex-start;
+      }
+
+      .settings-actions {
+        justify-content: stretch;
+      }
+
+      .settings-actions .button {
+        flex: 1;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="settings-page">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">CONFIGURATION</p>
+        <h1>Business Settings</h1>
+        <p>Configure your restaurant details and invoice preferences.</p>
+      </div>
+
+      <a class="button button-secondary" href="dashboard.html">
+        Dashboard
+      </a>
+    </header>
+
+    <div class="demo-notice">
+      Demo mode: Settings are temporary and are not saved to a database yet.
+    </div>
+
+    <form id="settingsForm" class="settings-layout">
+      <section class="settings-section">
+        <div class="section-heading">
+          <h2>Business Information</h2>
+          <p class="section-description">
+            These details will appear on your invoices.
+          </p>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="businessName">Business name</label>
+            <input
+              id="businessName"
+              name="businessName"
+              type="text"
+              maxlength="100"
+              placeholder="ABC Restaurant"
+              required
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="ownerName">Owner name</label>
+            <input
+              id="ownerName"
+              name="ownerName"
+              type="text"
+              maxlength="100"
+              placeholder="Business owner"
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="businessPhone">Business phone</label>
+            <input
+              id="businessPhone"
+              name="businessPhone"
+              type="tel"
+              maxlength="20"
+              placeholder="Business contact number"
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="businessEmail">Business email</label>
+            <input
+              id="businessEmail"
+              name="businessEmail"
+              type="email"
+              maxlength="150"
+              placeholder="restaurant@example.com"
+            >
+          </div>
+
+          <div class="form-field full-width">
+            <label for="businessAddress">Business address</label>
+            <textarea
+              id="businessAddress"
+              name="businessAddress"
+              maxlength="300"
+              placeholder="Enter your restaurant address"
+            ></textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="currency">Currency</label>
+            <select id="currency" name="currency">
+              <option value="INR">Indian Rupee (₹)</option>
+            </select>
+            <span class="field-help">
+              Currency selection is limited in this demo.
+            </span>
+          </div>
+
+          <div class="form-field">
+            <label for="invoicePrefix">Invoice number prefix</label>
+            <input
+              id="invoicePrefix"
+              name="invoicePrefix"
+              type="text"
+              maxlength="12"
+              value="INV"
+              pattern="[A-Za-z0-9-]+"
+              required
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <div class="section-heading">
+          <h2>Tax and Billing</h2>
+          <p class="section-description">
+            Choose how tax and discounts are calculated on invoices.
+          </p>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="taxRate">Default GST rate (%)</label>
+            <input
+              id="taxRate"
+              name="taxRate"
+              type="number"
+              min="0"
+              max="100"
+              step="0.01"
+              value="0"
+              required
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="discountType">Default discount type</label>
+            <select id="discountType" name="discountType">
+              <option value="none">No default discount</option>
+              <option value="percentage">Percentage (%)</option>
+              <option value="fixed">Fixed amount (₹)</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="defaultDiscount">Default discount value</label>
+            <input
+              id="defaultDiscount"
+              name="defaultDiscount"
+              type="number"
+              min="0"
+              max="10000000"
+              step="0.01"
+              value="0"
+              required
+            >
+            <span class="field-help">
+              A percentage discount cannot exceed 100%.
+            </span>
+          </div>
+
+          <div class="form-field">
+            <label for="rounding">Invoice rounding</label>
+            <select id="rounding" name="rounding">
+              <option value="exact">Keep paise</option>
+              <option value="nearest">Nearest rupee</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <div class="section-heading">
+          <h2>Invoice Preferences</h2>
+          <p class="section-description">
+            Control optional information shown on printed invoices.
+          </p>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <h3>Show business address</h3>
+            <p>Display your address on invoices.</p>
+          </div>
+          <input
+            type="checkbox"
+            id="showAddress"
+            name="showAddress"
+            checked
+          >
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <h3>Show business phone</h3>
+            <p>Display your contact number on invoices.</p>
+          </div>
+          <input
+            type="checkbox"
+            id="showPhone"
+            name="showPhone"
+            checked
+          >
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <h3>Show GST details</h3>
+            <p>Display tax information when applicable.</p>
+          </div>
+          <input
+            type="checkbox"
+            id="showTax"
+            name="showTax"
+            checked
+          >
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <h3>Show customer phone</h3>
+            <p>Include the customer's phone number on invoices.</p>
+          </div>
+          <input
+            type="checkbox"
+            id="showCustomerPhone"
+            name="showCustomerPhone"
+            checked
+          >
+        </div>
+
+        <div class="form-field" style="margin-top: 20px;">
+          <label for="invoiceFooter">Invoice footer message</label>
+          <textarea
+            id="invoiceFooter"
+            name="invoiceFooter"
+            maxlength="250"
+            placeholder="Thank you for visiting!"
+          ></textarea>
+        </div>
+      </section>
+
+      <div class="settings-actions">
+        <button class="button button-secondary" type="reset" id="resetButton">
+          Reset Form
+        </button>
+        <button class="button button-primary" type="submit">
+          Save Settings
+        </button>
+      </div>
+
+      <p id="feedbackMessage" class="feedback-message" role="status"></p>
+    </form>
+
+    <section class="settings-section danger-section" style="margin-top: 24px;">
+      <div class="section-heading">
+        <h2>Data and Account</h2>
+        <p class="section-description">
+          Account security and permanent data management will be enabled during backend integration.
+        </p>
+      </div>
+
+      <p class="section-description">
+        Firebase authentication, owner-specific database access, and secure account management are not connected in this demo.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    "use strict";
+
+    const settingsForm = document.getElementById("settingsForm");
+    const feedbackMessage = document.getElementById("feedbackMessage");
+
+    function showFeedback(message) {
+      feedbackMessage.textContent = message;
+      feedbackMessage.style.display = "block";
+    }
+
+    settingsForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const taxRate = Number(document.getElementById("taxRate").value);
+      const discountType = document.getElementById("discountType").value;
+      const discountValue = Number(
+        document.getElementById("defaultDiscount").value
+      );
+      const invoicePrefix = document.getElementById("invoicePrefix").value.trim();
+
+      if (!Number.isFinite(taxRate) || taxRate < 0 || taxRate > 100) {
+        showFeedback("Enter a GST rate between 0 and 100.");
+        return;
+      }
+
+      if (!Number.isFinite(discountValue) || discountValue < 0) {
+        showFeedback("Enter a valid non-negative discount value.");
+        return;
+      }
+
+      if (discountType === "percentage" && discountValue > 100) {
+        showFeedback("Percentage discount cannot exceed 100%.");
+        return;
+      }
+
+      if (!invoicePrefix || !/^[A-Za-z0-9-]+$/.test(invoicePrefix)) {
+        showFeedback("Use letters, numbers, or hyphens for the invoice prefix.");
+        return;
+      }
+
+      showFeedback(
+        "Settings validated for demo only. They have not been permanently saved."
+      );
+    });
+
+    settingsForm.addEventListener("reset", () => {
+      feedbackMessage.style.display = "none";
+    });
+  </script>
+</body>
+</html>
