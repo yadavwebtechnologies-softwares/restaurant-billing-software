@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#202124">
+  <meta name="description" content="Login to your restaurant billing dashboard.">
+
+  <title>Login | Restaurant Billing Software</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .login-page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      background: var(--color-white);
+    }
+
+    .login-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 35px;
+      min-width: 0;
+      padding: 35px clamp(25px, 5vw, 75px);
+      background: var(--color-charcoal);
+    }
+
+    .login-side .brand-name {
+      color: var(--color-white);
+    }
+
+    .login-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      width: fit-content;
+    }
+
+    .login-brand .brand-mark {
+      background: var(--color-orange);
+      color: var(--color-white);
+    }
+
+    .login-promo {
+      max-width: 520px;
+      padding-block: 45px;
+    }
+
+    .login-promo .eyebrow {
+      color: var(--color-yellow);
+    }
+
+    .login-promo h1 {
+      margin-top: 20px;
+      color: var(--color-white);
+      font-size: clamp(36px, 4.2vw, 56px);
+      line-height: 1.14;
+    }
+
+    .login-promo h1 span {
+      color: var(--color-yellow);
+    }
+
+    .login-promo > p {
+      max-width: 430px;
+      margin-top: 22px;
+      color: #D0D0D0;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .login-benefits {
+      display: grid;
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .login-benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+    }
+
+    .benefit-mark {
+      display: grid;
+      place-items: center;
+      width: 27px;
+      height: 27px;
+      flex-shrink: 0;
+      border-radius: 5px;
+      background: rgba(255, 200, 87, 0.14);
+      color: var(--color-yellow);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .login-benefit strong {
+      display: block;
+      color: var(--color-white);
+      font-size: 13px;
+    }
+
+    .login-benefit p {
+      margin-top: 3px;
+      color: #BDBDBD;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .login-side-footer {
+      color: #BDBDBD;
+      font-size: 11px;
+    }
+
+    .login-main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: 45px 28px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 410px;
+    }
+
+    .login-mobile-brand {
+      display: none;
+    }
+
+    .login-heading h2 {
+      margin-top: 12px;
+      font-size: 32px;
+      letter-spacing: -0.04em;
+    }
+
+    .login-heading p {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .demo-notice {
+      margin-top: 24px;
+      padding: 13px 15px;
+      background: #FFF5DE;
+      border: 1px solid #F1D89B;
+      border-radius: var(--radius-small);
+      color: #745018;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .login-form {
+      display: grid;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field label {
+      color: var(--color-charcoal);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .form-field input {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-small);
+      outline: none;
+      background: var(--color-white);
+      color: var(--color-charcoal);
+      font-size: 13px;
+      font-weight: 600;
+      transition: border-color var(--transition);
+    }
+
+    .form-field input::placeholder {
+      color: #8A8A8A;
+      font-weight: 600;
+    }
+
+    .form-field input:focus {
+      border-color: var(--color-orange);
+    }
+
+    .password-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .password-heading a {
+      color: var(--color-orange);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .login-submit {
+      width: 100%;
+      margin-top: 3px;
+      min-height: 49px;
+    }
+
+    .login-message {
+      display: none;
+      padding: 12px 14px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-small);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .login-message.is-visible {
+      display: block;
+    }
+
+    .login-message.is-error {
+      border-color: #E9B3A4;
+      background: #FFF0E9;
+      color: #A83E20;
+    }
+
+    .login-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-block: 24px;
+      color: var(--color-muted);
+      font-size: 11px;
+    }
+
+    .login-divider::before,
+    .login-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    .login-register {
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .login-register a {
+      color: var(--color-orange);
+      font-weight: 700;
+    }
+
+    .login-security-note {
+      margin-top: 30px;
+      padding-top: 18px;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-muted);
+      font-size: 11px;
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    .login-back {
+      display: inline-flex;
+      margin-top: 25px;
+      color: var(--color-muted);
+      font-size: 12px;
+    }
+
+    .login-back:hover {
+      color: var(--color-orange);
+    }
+
+    @media (max-width: 800px) {
+      .login-page {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .login-side {
+        display: none;
+      }
+
+      .login-main {
+        align-items: flex-start;
+        padding: 35px 24px;
+      }
+
+      .login-card {
+        max-width: 460px;
+        margin-inline: auto;
+      }
+
+      .login-mobile-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 55px;
+      }
+
+      .login-mobile-brand .brand-name {
+        max-width: 210px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .login-main {
+        padding: 25px 18px;
+      }
+
+      .login-mobile-brand {
+        margin-bottom: 40px;
+      }
+
+      .login-heading h2 {
+        font-size: 29px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="login-page">
+
+    <aside class="login-side">
+      <a href="index.html" class="login-brand" aria-label="Return to home">
+        <span class="brand-mark">Y</span>
+        <span class="brand-name">Yadav Web Technologies</span>
+      </a>
+
+      <div class="login-promo">
+        <span class="eyebrow">YOUR BUSINESS WORKSPACE</span>
+
+        <h1>
+          Billing that keeps
+          <span>business moving.</span>
+        </h1>
+
+        <p>
+          A planned workspace for restaurant billing, product management
+          and professional invoice preparation.
+        </p>
+
+        <div class="login-benefits">
+          <div class="login-benefit">
+            <span class="benefit-mark">01</span>
+            <div>
+              <strong>Organised Billing</strong>
+              <p>Keep your billing workflow clear and efficient.</p>
+            </div>
+          </div>
+
+          <div class="login-benefit">
+            <span class="benefit-mark">02</span>
+            <div>
+              <strong>Business-Specific Data</strong>
+              <p>Planned account-based access to individual business records.</p>
+            </div>
+          </div>
+
+          <div class="login-benefit">
+            <span class="benefit-mark">03</span>
+            <div>
+              <strong>Professional Invoices</strong>
+              <p>Prepare clean, printable A4 billing documents.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="login-side-footer">
+        Restaurant Billing and Invoice Software
+      </p>
+    </aside>
+
+    <section class="login-main">
+      <div class="login-card">
+
+        <a href="index.html" class="login-mobile-brand">
+          <span class="brand-mark">Y</span>
+          <span class="brand-name">Yadav Web Technologies</span>
+        </a>
+
+        <div class="login-heading">
+          <span class="eyebrow">ACCOUNT ACCESS</span>
+          <h2>Welcome back</h2>
+          <p>Enter your account details to continue to your workspace.</p>
+        </div>
+
+        <div class="demo-notice">
+          Demo frontend only. Authentication is not connected yet.
+          Do not enter a real password on this demo page.
+        </div>
+
+        <form class="login-form" id="login-form">
+
+          <div class="form-field">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="form-field">
+            <div class="password-heading">
+              <label for="password">Password</label>
+              <a href="#password-help" id="forgot-password">
+                Forgot password?
+              </a>
+            </div>
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter demo password"
+              autocomplete="off"
+              required
+            >
+          </div>
+
+          <div
+            class="login-message"
+            id="login-message"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+          <button type="submit" class="button button-primary login-submit">
+            Continue to Dashboard
+          </button>
+
+        </form>
+
+        <div class="login-divider">OR</div>
+
+        <p class="login-register">
+          New business owner?
+          <a href="#registration" id="register-link">Registration will be added later</a>
+        </p>
+
+        <p class="login-security-note">
+          Account authentication, password recovery and registration
+          will be enabled during the backend integration phase.
+        </p>
+
+        <a href="index.html" class="login-back">
+          Back to home
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const loginForm = document.getElementById("login-form");
+    const loginMessage = document.getElementById("login-message");
+
+    function showMessage(message) {
+      loginMessage.textContent = message;
+      loginMessage.className = "login-message is-visible is-error";
+    }
+
+    loginForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      showMessage(
+        "Demo mode: login is not active yet. Firebase Authentication will be integrated in a later phase."
+      );
+    });
+
+    document
+      .getElementById("forgot-password")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+
+        showMessage(
+          "Password recovery will be available after authentication is integrated."
+        );
+      });
+
+    document
+      .getElementById("register-link")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+
+        showMessage(
+          "Account registration will be implemented during the authentication phase."
+        );
+      });
+  </script>
+
+</body>
+</html>
