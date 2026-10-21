@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <title>Web Tools</title>
+
+  <path
+    d="M14 6.5A5 5 0 0 0 7.5 13L4 16.5A2.1 2.1 0 0 0 7 19.5L10.5 16A5 5 0 0 0 17 9.5L13.5 13L11 10.5L14 6.5Z"
+    fill="none"
+    stroke="#111111"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
