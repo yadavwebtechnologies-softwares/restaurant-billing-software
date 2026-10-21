@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
+  <title>Yadav Web Tools — Project Illustration</title>
+
+  <rect width="640" height="400" rx="12" fill="#F5F5F5"/>
+
+  <rect x="64" y="48" width="512" height="304" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+
+  <path d="M64 84H576" stroke="#D6D6D6"/>
+
+  <circle cx="86" cy="66" r="4" fill="#B8B8B8"/>
+  <circle cx="101" cy="66" r="4" fill="#B8B8B8"/>
+  <circle cx="116" cy="66" r="4" fill="#B8B8B8"/>
+
+  <rect x="88" y="104" width="464" height="48" rx="8" fill="#F3F3F3"/>
+  <rect x="106" y="119" width="24" height="18" rx="3" stroke="#111111" stroke-width="1.8"/>
+  <path d="M111 128h14M118 121v14" stroke="#111111" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="143" y="118" width="150" height="7" rx="3.5" fill="#222222"/>
+  <rect x="143" y="132" width="96" height="5" rx="2.5" fill="#B8B8B8"/>
+  <circle cx="525" cy="128" r="11" fill="#111111"/>
+  <path d="m520 128 4 4 7-8" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="88" y="172" width="220" height="142" rx="9" fill="#FAFAFA" stroke="#DCDCDC"/>
+  <rect x="104" y="188" width="34" height="34" rx="7" fill="#111111"/>
+  <path d="m115 199-5 6 5 6M127 199l5 6-5 6M124 196l-6 18" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="104" y="236" width="130" height="7" rx="3.5" fill="#222222"/>
+  <rect x="104" y="251" width="174" height="5" rx="2.5" fill="#D0D0D0"/>
+  <rect x="104" y="263" width="154" height="5" rx="2.5" fill="#D0D0D0"/>
+  <rect x="104" y="281" width="78" height="21" rx="5" fill="#111111"/>
+  <path d="M116 291h30" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+
+  <rect x="326" y="172" width="226" height="142" rx="9" fill="#FAFAFA" stroke="#DCDCDC"/>
+  <rect x="342" y="188" width="194" height="34" rx="6" fill="#EEEEEE"/>
+  <circle cx="359" cy="205" r="6" stroke="#111111" stroke-width="1.5"/>
+  <path d="m363 209 4 4" stroke="#111111" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="377" y="201" width="102" height="6" rx="3" fill="#B5B5B5"/>
+  <path d="M342 237H536" stroke="#E0E0E0"/>
+  <rect x="342" y="249" width="194" height="25" rx="5" fill="#F0F0F0"/>
+  <path d="m354 261 4 4 7-8" stroke="#111111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="372" y="258" width="112" height="6" rx="3" fill="#AFAFAF"/>
+  <rect x="342" y="282" width="194" height="20" rx="5" fill="#F0F0F0"/>
+  <path d="m354 291 4 4 7-8" stroke="#111111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="372" y="290" width="83" height="5" rx="2.5" fill="#AFAFAF"/>
+</svg>
