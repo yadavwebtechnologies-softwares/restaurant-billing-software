@@ -1,113 +1,775 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta
+    name="description"
+    content="Yadav Web Technologies offers website development, custom software solutions, School ERP, Hotel CRM, restaurant billing and invoice software, web tools, WhatsApp automation, membership management, Firebase integration and Cloudflare services."
+  >
 
+  <meta name="robots" content="index, follow">
+
+  <title>Yadav Web Technologies | Web Development, ERP, Billing & Software Solutions</title>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="style.css">
+
+  <script src="script.js" defer></script>
 </head>
-<body class="auth-body">
 
-  <div class="auth-shell">
+<body class="home-page">
 
-    <!-- LEFT: Brand panel -->
-    <div class="auth-brand">
-      <div class="auth-brand-inner">
-        <div class="auth-mark">B</div>
-        <h1 class="auth-brand-title"><span class="ph" data-setting="businessName">[Business Name]</span></h1>
-        <p class="auth-brand-tag"><span class="ph" data-setting="tagline">[Tagline]</span></p>
-        <p class="auth-brand-sub">
-          Restaurant billing, invoicing, and reports — all in one place.
+  <a class="skip-link" href="#mainContent">Skip to content</a>
+
+  <!-- Shared Site Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-container site-header-inner">
+
+      <a class="site-brand" href="index.html"
+         aria-label="Yadav Web Technologies home">
+
+        <img
+          class="site-brand-logo"
+          src="assets/brand/ywt-logo.svg"
+          alt=""
+          width="42"
+          height="42"
+        >
+
+        <span class="site-brand-text">
+          <span class="site-brand-name">Yadav Web Technologies</span>
+          <span class="site-brand-tagline">Websites. Software. Solutions.</span>
+        </span>
+      </a>
+
+      <button
+        class="menu-btn"
+        id="menuBtn"
+        type="button"
+        aria-label="Open navigation"
+        aria-controls="primaryNav"
+        aria-expanded="false"
+      >
+        <img src="assets/icons/menu.svg" alt="" width="22" height="22">
+      </button>
+
+      <nav class="site-nav" id="primaryNav" aria-label="Main navigation">
+
+        <a class="nav-link active"
+           href="index.html"
+           aria-current="page">Home</a>
+
+        <a class="nav-link" href="services.html">Services</a>
+        <a class="nav-link" href="portfolio.html">Portfolio</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="pricing.html">Pricing</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+
+        <a class="btn btn-primary header-cta" href="contact.html">
+          Get a Quote
+          <img src="assets/icons/arrow-right.svg" alt="" width="16" height="16">
+        </a>
+
+      </nav>
+
+    </div>
+  </header>
+
+  <main id="mainContent">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="site-container hero-grid">
+
+        <div class="hero-content" data-reveal>
+
+          <p class="section-eyebrow">
+            WEB DEVELOPMENT & BUSINESS SOFTWARE
+          </p>
+
+          <h1>
+            Technology built around
+            <span class="text-highlight">your business.</span>
+          </h1>
+
+          <p class="hero-description">
+            Yadav Web Technologies develops websites, custom business
+            software, management systems, web tools and automation
+            solutions tailored to your requirements.
+          </p>
+
+          <div class="hero-actions">
+
+            <a class="btn btn-primary" href="contact.html">
+              Discuss Your Project
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="17" height="17">
+            </a>
+
+            <a class="btn btn-secondary" href="portfolio.html">
+              Explore Projects
+            </a>
+
+          </div>
+
+          <div class="hero-meta">
+            <span>Website Development</span>
+            <span class="meta-separator" aria-hidden="true"></span>
+            <span>Business Software</span>
+            <span class="meta-separator" aria-hidden="true"></span>
+            <span>Automation</span>
+          </div>
+
+        </div>
+
+        <!-- Project Illustration -->
+        <div class="hero-visual" data-reveal>
+
+          <div class="hero-visual-label">
+            <span class="status-indicator" aria-hidden="true"></span>
+            <span>Selected Project</span>
+          </div>
+
+          <div class="hero-project-preview">
+            <img
+              src="assets/projects/yadav-web-tools.svg"
+              alt="Yadav Web Tools project interface illustration"
+              width="640"
+              height="420"
+            >
+          </div>
+
+          <div class="hero-visual-caption">
+
+            <div>
+              <p class="muted-text">Featured Project</p>
+              <h2>Yadav Web Tools</h2>
+            </div>
+
+            <a class="text-link" href="portfolio.html">
+              View Portfolio
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="15" height="15">
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="section services-section" id="services">
+      <div class="site-container">
+
+        <div class="section-heading" data-reveal>
+
+          <div>
+            <p class="section-eyebrow">OUR SERVICES</p>
+            <h2>Digital solutions for businesses</h2>
+
+            <p class="section-description">
+              Explore website development, business management
+              software, automation and technical services.
+            </p>
+          </div>
+
+          <a class="text-link" href="services.html">
+            All Services
+            <img src="assets/icons/arrow-right.svg"
+                 alt="" width="16" height="16">
+          </a>
+
+        </div>
+
+        <div class="service-grid">
+
+          <article class="service-card" data-reveal>
+            <img class="service-icon"
+                 src="assets/icons/website.svg"
+                 alt="" width="36" height="36">
+
+            <h3>Website Development</h3>
+
+            <p>
+              Business websites, organization websites,
+              personal portfolios and custom web solutions.
+            </p>
+
+            <a class="card-link"
+               href="services.html#website-development">
+              Explore Service
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="15" height="15">
+            </a>
+          </article>
+
+          <article class="service-card" data-reveal>
+            <img class="service-icon"
+                 src="assets/icons/school.svg"
+                 alt="" width="36" height="36">
+
+            <h3>School ERP</h3>
+
+            <p>
+              School administration and management software
+              tailored to institutional requirements.
+            </p>
+
+            <a class="card-link" href="services.html#school-erp">
+              Explore Service
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="15" height="15">
+            </a>
+          </article>
+
+          <article class="service-card" data-reveal>
+            <img class="service-icon"
+                 src="assets/icons/hotel.svg"
+                 alt="" width="36" height="36">
+
+            <h3>Hotel CRM</h3>
+
+            <p>
+              Digital solutions for guest information,
+              bookings and hotel management workflows.
+            </p>
+
+            <a class="card-link" href="services.html#hotel-crm">
+              Explore Service
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="15" height="15">
+            </a>
+          </article>
+
+          <article class="service-card" data-reveal>
+            <img class="service-icon"
+                 src="assets/icons/receipt.svg"
+                 alt="" width="36" height="36">
+
+            <h3>Restaurant Billing</h3>
+
+            <p>
+              Restaurant billing, invoice generation,
+              product management and sales tools.
+            </p>
+
+            <a class="card-link"
+               href="services.html#restaurant-billing">
+              Explore Service
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="15" height="15">
+            </a>
+          </article>
+
+          <article class="service-card" data-reveal>
+            <img class="service-icon"
+                 src="assets/icons/tools.svg"
+                 alt="" width="36" height="36">
+
+            <h3>Custom Web Tools</h3>
+
+            <p>
+              Browser-based utilities and custom tools
+              designed for specific tasks and workflows.
+            </p>
+
+            <a class="card-link" href="services.html#web-tools">
+              Explore Service
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="15" height="15">
+            </a>
+          </article>
+
+          <article class="service-card" data-reveal>
+            <img class="service-icon"
+                 src="assets/icons/automation.svg"
+                 alt="" width="36" height="36">
+
+            <h3>WhatsApp Automation</h3>
+
+            <p>
+              Business messaging workflows, notifications
+              and supported automation integrations.
+            </p>
+
+            <a class="card-link"
+               href="services.html#whatsapp-automation">
+              Explore Service
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="15" height="15">
+            </a>
+          </article>
+
+          <article class="service-card" data-reveal>
+            <img class="service-icon"
+                 src="assets/icons/certificate.svg"
+                 alt="" width="36" height="36">
+
+            <h3>Membership & Certification</h3>
+
+            <p>
+              Membership records, administrative approval
+              workflows and certificate management.
+            </p>
+
+            <a class="card-link"
+               href="services.html#membership-certification">
+              Explore Service
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="15" height="15">
+            </a>
+          </article>
+
+          <article class="service-card" data-reveal>
+            <img class="service-icon"
+                 src="assets/icons/database.svg"
+                 alt="" width="36" height="36">
+
+            <h3>Database & Cloud Services</h3>
+
+            <p>
+              Firebase database integration, Cloudflare
+              configuration and deployment assistance.
+            </p>
+
+            <a class="card-link"
+               href="services.html#database-cloud">
+              Explore Service
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="15" height="15">
+            </a>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="section projects-section" id="projects">
+      <div class="site-container">
+
+        <div class="section-heading" data-reveal>
+
+          <div>
+            <p class="section-eyebrow">SELECTED WORK</p>
+            <h2>Projects and software solutions</h2>
+
+            <p class="section-description">
+              Explore existing projects across web tools,
+              business management, education and billing software.
+            </p>
+          </div>
+
+          <a class="text-link" href="portfolio.html">
+            View All Projects
+            <img src="assets/icons/arrow-right.svg"
+                 alt="" width="16" height="16">
+          </a>
+
+        </div>
+
+        <div class="project-grid">
+
+          <article class="project-card" data-reveal>
+
+            <a class="project-visual"
+               href="portfolio.html#yadav-web-tools"
+               aria-label="View Yadav Web Tools project">
+
+              <img
+                src="assets/projects/yadav-web-tools.svg"
+                alt="Yadav Web Tools interface illustration"
+                width="640"
+                height="420"
+                loading="lazy"
+              >
+
+            </a>
+
+            <div class="project-card-content">
+              <p class="project-category">Web Tools</p>
+              <h3>Yadav Web Tools</h3>
+
+              <p>
+                A collection of web-based tools and utilities.
+              </p>
+
+              <a class="card-link"
+                 href="portfolio.html#yadav-web-tools">
+                Project Details
+                <img src="assets/icons/arrow-right.svg"
+                     alt="" width="15" height="15">
+              </a>
+            </div>
+
+          </article>
+
+          <article class="project-card" data-reveal>
+
+            <a class="project-visual"
+               href="portfolio.html#organization-membership"
+               aria-label="View Organization Website project">
+
+              <img
+                src="assets/projects/organization-membership.svg"
+                alt="Organization membership and certification workflow illustration"
+                width="640"
+                height="420"
+                loading="lazy"
+              >
+
+            </a>
+
+            <div class="project-card-content">
+              <p class="project-category">Organization Management</p>
+              <h3>Organization Website</h3>
+
+              <p>
+                Membership management, certificate approval
+                and administrative workflows.
+              </p>
+
+              <a class="card-link"
+                 href="portfolio.html#organization-membership">
+                Project Details
+                <img src="assets/icons/arrow-right.svg"
+                     alt="" width="15" height="15">
+              </a>
+            </div>
+
+          </article>
+
+          <article class="project-card" data-reveal>
+
+            <a class="project-visual"
+               href="portfolio.html#school-erp"
+               aria-label="View School ERP project">
+
+              <img
+                src="assets/projects/school-erp.svg"
+                alt="School ERP management interface illustration"
+                width="640"
+                height="420"
+                loading="lazy"
+              >
+
+            </a>
+
+            <div class="project-card-content">
+              <p class="project-category">Education Software</p>
+              <h3>School ERP</h3>
+
+              <p>
+                A school management system for institutional
+                administration and student records.
+              </p>
+
+              <a class="card-link" href="portfolio.html#school-erp">
+                Project Details
+                <img src="assets/icons/arrow-right.svg"
+                     alt="" width="15" height="15">
+              </a>
+            </div>
+
+          </article>
+
+          <article class="project-card" data-reveal>
+
+            <a class="project-visual"
+               href="portfolio.html#skill2job"
+               aria-label="View Skill2Job project">
+
+              <img
+                src="assets/projects/skill2job.svg"
+                alt="Skill2Job job notification portal illustration"
+                width="640"
+                height="420"
+                loading="lazy"
+              >
+
+            </a>
+
+            <div class="project-card-content">
+              <p class="project-category">Jobs & Careers</p>
+              <h3>Skill2Job</h3>
+
+              <p>
+                A job portal focused on job listings
+                and job notifications.
+              </p>
+
+              <a class="card-link" href="portfolio.html#skill2job">
+                Project Details
+                <img src="assets/icons/arrow-right.svg"
+                     alt="" width="15" height="15">
+              </a>
+            </div>
+
+          </article>
+
+          <article class="project-card" data-reveal>
+
+            <a class="project-visual"
+               href="portfolio.html#restaurant-billing"
+               aria-label="View Restaurant Billing project">
+
+              <img
+                src="assets/projects/restaurant-billing.svg"
+                alt="Restaurant billing and invoice software illustration"
+                width="640"
+                height="420"
+                loading="lazy"
+              >
+
+            </a>
+
+            <div class="project-card-content">
+              <p class="project-category">Business Software</p>
+              <h3>Restaurant Billing</h3>
+
+              <p>
+                Restaurant billing and invoice management software.
+              </p>
+
+              <a class="card-link"
+                 href="portfolio.html#restaurant-billing">
+                Project Details
+                <img src="assets/icons/arrow-right.svg"
+                     alt="" width="15" height="15">
+              </a>
+            </div>
+
+          </article>
+
+          <article class="project-card" data-reveal>
+
+            <a class="project-visual"
+               href="portfolio.html#personal-portfolio"
+               aria-label="View Personal Portfolio project">
+
+              <img
+                src="assets/projects/personal-portfolio.svg"
+                alt="Personal developer portfolio interface illustration"
+                width="640"
+                height="420"
+                loading="lazy"
+              >
+
+            </a>
+
+            <div class="project-card-content">
+              <p class="project-category">Web Development</p>
+              <h3>Personal Portfolio</h3>
+
+              <p>
+                A personal website presenting a developer's
+                profile, skills and work.
+              </p>
+
+              <a class="card-link"
+                 href="portfolio.html#personal-portfolio">
+                Project Details
+                <img src="assets/icons/arrow-right.svg"
+                     alt="" width="15" height="15">
+              </a>
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Development Process -->
+    <section class="section process-section" id="process">
+      <div class="site-container">
+
+        <div class="section-heading" data-reveal>
+
+          <div>
+            <p class="section-eyebrow">HOW WE WORK</p>
+            <h2>From requirements to delivery</h2>
+
+            <p class="section-description">
+              A clear development process keeps projects
+              organized and aligned with your requirements.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="process-grid">
+
+          <article class="process-card" data-reveal>
+            <span class="process-number">01</span>
+            <h3>Understand</h3>
+            <p>
+              Discuss your goals, requirements
+              and expected project outcome.
+            </p>
+          </article>
+
+          <article class="process-card" data-reveal>
+            <span class="process-number">02</span>
+            <h3>Plan</h3>
+            <p>
+              Define the project scope, required features
+              and proposed approach.
+            </p>
+          </article>
+
+          <article class="process-card" data-reveal>
+            <span class="process-number">03</span>
+            <h3>Develop</h3>
+            <p>
+              Build and test the solution according
+              to the agreed project scope.
+            </p>
+          </article>
+
+          <article class="process-card" data-reveal>
+            <span class="process-number">04</span>
+            <h3>Deliver</h3>
+            <p>
+              Review the finished work and arrange
+              delivery and deployment.
+            </p>
+          </article>
+
+        </div>
+
+        <div class="section-bottom-link" data-reveal>
+          <a class="text-link" href="process.html">
+            Learn About the Process
+            <img src="assets/icons/arrow-right.svg"
+                 alt="" width="16" height="16">
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="section contact-cta-section">
+      <div class="site-container">
+
+        <div class="cta-panel" data-reveal>
+
+          <div class="cta-content">
+            <p class="section-eyebrow">LET'S WORK TOGETHER</p>
+
+            <h2>Have a project in mind?</h2>
+
+            <p>
+              Share your requirements and discuss a suitable
+              website, software or automation solution.
+            </p>
+          </div>
+
+          <div class="cta-actions">
+
+            <a class="btn btn-primary" href="contact.html">
+              Start a Conversation
+              <img src="assets/icons/arrow-right.svg"
+                   alt="" width="17" height="17">
+            </a>
+
+            <a class="btn btn-secondary"
+               href="mailto:yadavwebdeveloper@gmail.com">
+              <img src="assets/icons/mail.svg"
+                   alt="" width="17" height="17">
+              Send an Email
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Shared Site Footer -->
+  <footer class="site-footer">
+    <div class="site-container">
+
+      <div class="footer-main">
+
+        <div class="footer-brand">
+
+          <a class="site-brand" href="index.html">
+
+            <img
+              src="assets/brand/ywt-logo.svg"
+              alt=""
+              width="38"
+              height="38"
+            >
+
+            <span class="site-brand-text">
+              <span class="site-brand-name">Yadav Web Technologies</span>
+              <span class="site-brand-tagline">
+                Websites. Software. Solutions.
+              </span>
+            </span>
+
+          </a>
+
+          <p class="footer-description">
+            Website development, business software and digital
+            solutions tailored to project requirements.
+          </p>
+
+        </div>
+
+        <div class="footer-column">
+          <h2>Explore</h2>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="about.html">About</a>
+          <a href="pricing.html">Pricing</a>
+        </div>
+
+        <div class="footer-column">
+          <h2>Get in Touch</h2>
+
+          <a href="contact.html">Contact</a>
+
+          <a href="mailto:yadavwebdeveloper@gmail.com">
+            yadavwebdeveloper@gmail.com
+          </a>
+
+          <p class="footer-location">
+            Hawaipur, Lanka, Hojai, Guwahati, Assam
+          </p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <p>
+          &copy; <span id="currentYear">2026</span>
+          Yadav Web Technologies. All Rights Reserved.
         </p>
-        <ul class="auth-features">
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Generate GST-ready invoices in seconds
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Track sales, payments, and top products
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Print or save A4 invoices instantly
-          </li>
-        </ul>
-      </div>
-      <div class="auth-brand-foot">
-        <span><span class="ph" data-setting="businessName">[Business Name]</span> · v1.0</span>
-      </div>
-    </div>
 
-    <!-- RIGHT: Login form -->
-    <div class="auth-form-panel">
-      <div class="auth-form-card">
-
-        <div class="auth-form-head">
-          <h2>Sign in</h2>
-          <p>Welcome back. Please enter your details.</p>
-        </div>
-
-        <form id="loginForm" class="auth-form" novalidate>
-          <div class="field">
-            <label for="email">Email address</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              class="input"
-              placeholder="owner@restaurant.com"
-              autocomplete="email"
-              required
-            />
-          </div>
-
-          <div class="field">
-            <label for="password">
-              Password
-              <a href="#" class="auth-link" id="forgotLink">Forgot?</a>
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              class="input"
-              placeholder="Enter your password"
-              autocomplete="current-password"
-              required
-            />
-          </div>
-
-          <div class="auth-row">
-            <label class="auth-checkbox">
-              <input type="checkbox" id="remember" />
-              <span>Remember me</span>
-            </label>
-          </div>
-
-          <div class="auth-msg" id="authMsg" hidden></div>
-
-          <button type="submit" class="btn btn-primary auth-submit" id="loginBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5M15 12H3"/></svg>
-            Sign in
-          </button>
-        </form>
-
-        <div class="auth-form-foot">
-          <span>Secured by Firebase Authentication</span>
+        <div class="footer-legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms & Conditions</a>
         </div>
 
       </div>
+
     </div>
+  </footer>
 
-  </div>
-
-  <script src="script.js"></script>
-  <script src="login.js"></script>
 </body>
 </html>
