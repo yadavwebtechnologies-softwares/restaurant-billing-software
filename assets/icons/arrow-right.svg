@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <title>Arrow Right</title>
+
+  <path
+    d="M5 12H19M12 5L19 12L12 19"
+    fill="none"
+    stroke="#111111"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
