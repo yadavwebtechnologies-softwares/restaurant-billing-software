@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
+  <title>Restaurant Billing and Invoice Software</title>
+
+  <rect width="640" height="400" rx="12" fill="#F5F5F5"/>
+  <rect x="48" y="36" width="544" height="328" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+
+  <path d="M48 82H592" stroke="#D6D6D6"/>
+  <circle cx="70" cy="59" r="4" fill="#B8B8B8"/>
+  <circle cx="85" cy="59" r="4" fill="#B8B8B8"/>
+  <circle cx="100" cy="59" r="4" fill="#B8B8B8"/>
+
+  <rect x="67" y="99" width="34" height="34" rx="7" fill="#111111"/>
+  <path d="M76 108h16v16H76zM80 112h8M80 116h8M80 120h5" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="113" y="104" width="138" height="7" rx="3.5" fill="#222222"/>
+  <rect x="113" y="118" width="97" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="477" y="104" width="91" height="27" rx="6" fill="#111111"/>
+  <path d="M493 117h11M498.5 111.5v11" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="512" y="114" width="42" height="5" rx="2.5" fill="#FFFFFF"/>
+
+  <rect x="67" y="150" width="326" height="190" rx="8" fill="#FAFAFA" stroke="#DEDEDE"/>
+  <rect x="83" y="165" width="115" height="6" rx="3" fill="#222222"/>
+  <rect x="83" y="179" width="178" height="5" rx="2.5" fill="#D0D0D0"/>
+
+  <rect x="83" y="197" width="294" height="30" rx="4" fill="#EEEEEE"/>
+  <rect x="95" y="209" width="71" height="5" rx="2.5" fill="#777777"/>
+  <rect x="250" y="209" width="38" height="5" rx="2.5" fill="#777777"/>
+  <rect x="322" y="209" width="42" height="5" rx="2.5" fill="#777777"/>
+
+  <path d="M83 239H377M83 270H377M83 301H377" stroke="#E1E1E1"/>
+  <rect x="95" y="250" width="103" height="5" rx="2.5" fill="#AFAFAF"/>
+  <rect x="256" y="250" width="25" height="5" rx="2.5" fill="#AFAFAF"/>
+  <rect x="322" y="250" width="42" height="5" rx="2.5" fill="#AFAFAF"/>
+  <rect x="95" y="281" width="118" height="5" rx="2.5" fill="#AFAFAF"/>
+  <rect x="256" y="281" width="25" height="5" rx="2.5" fill="#AFAFAF"/>
+  <rect x="322" y="281" width="42" height="5" rx="2.5" fill="#AFAFAF"/>
+  <rect x="95" y="312" width="89" height="5" rx="2.5" fill="#AFAFAF"/>
+  <rect x="256" y="312" width="25" height="5" rx="2.5" fill="#AFAFAF"/>
+  <rect x="322" y="312" width="42" height="5" rx="2.5" fill="#AFAFAF"/>
+
+  <rect x="408" y="150" width="160" height="117" rx="8" fill="#F7F7F7" stroke="#DEDEDE"/>
+  <rect x="424" y="165" width="94" height="6" rx="3" fill="#222222"/>
+  <rect x="424" y="181" width="127" height="5" rx="2.5" fill="#C8C8C8"/>
+  <rect x="424" y="194" width="108" height="5" rx="2.5" fill="#C8C8C8"/>
+  <path d="M424 209H551" stroke="#DDDDDD"/>
+  <rect x="424" y="220" width="57" height="5" rx="2.5" fill="#999999"/>
+  <rect x="496" y="219" width="55" height="7" rx="3.5" fill="#222222"/>
+
+  <rect x="408" y="279" width="160" height="61" rx="8" fill="#111111"/>
+  <rect x="424" y="292" width="67" height="5" rx="2.5" fill="#C4C4C4"/>
+  <rect x="424" y="307" width="91" height="10" rx="4" fill="#FFFFFF"/>
+  <path d="M531 295v21M520.5 305.5h21" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
