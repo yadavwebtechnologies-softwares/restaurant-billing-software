@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <title>Restaurant Billing</title>
+
+  <path
+    d="M6 3L8 4.5L10 3L12 4.5L14 3L16 4.5L18 3V21L16 19.5L14 21L12 19.5L10 21L8 19.5L6 21V3Z"
+    fill="none"
+    stroke="#111111"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <path
+    d="M9 8H15M9 12H15M9 16H13"
+    fill="none"
+    stroke="#111111"
+    stroke-width="1.7"
+    stroke-linecap="round"
+  />
+</svg>
