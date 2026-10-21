@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <title>Automation</title>
+  <path d="M12 8V4"/>
+  <circle cx="12" cy="3" r="1"/>
+  <rect x="5" y="8" width="14" height="10" rx="2"/>
+  <path d="M9 12h.01M15 12h.01M9 15h6"/>
+  <path d="M8 18v3M16 18v3M5 12H2M22 12h-3"/>
+</svg>
