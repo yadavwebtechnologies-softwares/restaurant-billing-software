@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
+  <title>School ERP Management System</title>
+
+  <rect width="640" height="400" rx="12" fill="#F5F5F5"/>
+  <rect x="48" y="36" width="544" height="328" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+
+  <path d="M48 82H592" stroke="#D6D6D6"/>
+  <circle cx="70" cy="59" r="4" fill="#B8B8B8"/>
+  <circle cx="85" cy="59" r="4" fill="#B8B8B8"/>
+  <circle cx="100" cy="59" r="4" fill="#B8B8B8"/>
+
+  <rect x="64" y="98" width="128" height="248" rx="8" fill="#F4F4F4"/>
+  <rect x="80" y="114" width="34" height="34" rx="6" fill="#111111"/>
+  <path d="m86 127 11-6 11 6-11 6-11-6Z" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M89 130v6l8 4 8-4v-6" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/>
+  <rect x="122" y="119" width="52" height="6" rx="3" fill="#333333"/>
+  <rect x="122" y="131" width="39" height="4" rx="2" fill="#BDBDBD"/>
+
+  <rect x="80" y="166" width="96" height="28" rx="5" fill="#111111"/>
+  <rect x="92" y="177" width="9" height="7" rx="1" stroke="#FFFFFF" stroke-width="1.2"/>
+  <rect x="108" y="177" width="51" height="5" rx="2.5" fill="#FFFFFF"/>
+
+  <rect x="92" y="208" width="68" height="5" rx="2.5" fill="#B8B8B8"/>
+  <rect x="92" y="230" width="58" height="5" rx="2.5" fill="#B8B8B8"/>
+  <rect x="92" y="252" width="70" height="5" rx="2.5" fill="#B8B8B8"/>
+  <rect x="92" y="274" width="62" height="5" rx="2.5" fill="#B8B8B8"/>
+  <rect x="92" y="296" width="54" height="5" rx="2.5" fill="#B8B8B8"/>
+
+  <rect x="208" y="98" width="368" height="52" rx="7" fill="#FAFAFA" stroke="#E1E1E1"/>
+  <rect x="224" y="111" width="132" height="7" rx="3.5" fill="#222222"/>
+  <rect x="224" y="125" width="93" height="5" rx="2.5" fill="#BDBDBD"/>
+  <circle cx="548" cy="124" r="11" fill="#EEEEEE"/>
+  <circle cx="548" cy="121" r="3" stroke="#111111" stroke-width="1.3"/>
+  <path d="M542 130c1-4 3-5 6-5s5 1 6 5" stroke="#111111" stroke-width="1.3" stroke-linecap="round"/>
+
+  <rect x="208" y="164" width="110" height="72" rx="7" fill="#FAFAFA" stroke="#E1E1E1"/>
+  <rect x="222" y="178" width="27" height="27" rx="6" fill="#EAEAEA"/>
+  <path d="M229 184h13v15h-13zM232 188h7M232 192h7" stroke="#111111" stroke-width="1.3" stroke-linejoin="round"/>
+  <rect x="222" y="214" width="66" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="222" y="225" width="40" height="4" rx="2" fill="#E0E0E0"/>
+
+  <rect x="331" y="164" width="110" height="72" rx="7" fill="#FAFAFA" stroke="#E1E1E1"/>
+  <rect x="345" y="178" width="27" height="27" rx="6" fill="#EAEAEA"/>
+  <circle cx="358.5" cy="186" r="4" stroke="#111111" stroke-width="1.3"/>
+  <path d="M350 198c1-5 4-7 8.5-7s7.5 2 8.5 7" stroke="#111111" stroke-width="1.3" stroke-linecap="round"/>
+  <rect x="345" y="214" width="66" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="345" y="225" width="40" height="4" rx="2" fill="#E0E0E0"/>
+
+  <rect x="454" y="164" width="122" height="72" rx="7" fill="#FAFAFA" stroke="#E1E1E1"/>
+  <rect x="468" y="178" width="27" height="27" rx="6" fill="#EAEAEA"/>
+  <path d="M474 184h15v14h-15zM477 188h9M477 192h9" stroke="#111111" stroke-width="1.3" stroke-linejoin="round"/>
+  <rect x="468" y="214" width="76" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="468" y="225" width="46" height="4" rx="2" fill="#E0E0E0"/>
+
+  <rect x="208" y="250" width="368" height="96" rx="7" fill="#FAFAFA" stroke="#E1E1E1"/>
+  <rect x="224" y="264" width="108" height="6" rx="3" fill="#333333"/>
+  <path d="M224 283H560M224 302H560M224 321H560" stroke="#E1E1E1"/>
+  <path d="M350 283V335M438 283V335M508 283V335" stroke="#E1E1E1"/>
+  <rect x="224" y="290" width="75" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="360" y="290" width="51" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="448" y="290" width="42" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="520" y="290" width="31" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="224" y="309" width="89" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="360" y="309" width="61" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="448" y="309" width="42" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="520" y="309" width="31" height="5" rx="2.5" fill="#BDBDBD"/>
+</svg>
