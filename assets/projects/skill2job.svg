@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
+  <title>Skill2Job — Job Notification Portal</title>
+
+  <rect width="640" height="400" rx="12" fill="#F5F5F5"/>
+  <rect x="48" y="36" width="544" height="328" rx="12" fill="#FFFFFF" stroke="#D6D6D6"/>
+
+  <path d="M48 82H592" stroke="#D6D6D6"/>
+  <circle cx="70" cy="59" r="4" fill="#B8B8B8"/>
+  <circle cx="85" cy="59" r="4" fill="#B8B8B8"/>
+  <circle cx="100" cy="59" r="4" fill="#B8B8B8"/>
+
+  <rect x="68" y="99" width="34" height="34" rx="7" fill="#111111"/>
+  <path d="M78 110h14v12H78zM82 107h6M82 114h6" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="114" y="105" width="105" height="7" rx="3.5" fill="#222222"/>
+  <rect x="114" y="119" width="80" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="443" y="104" width="124" height="27" rx="6" fill="#111111"/>
+  <rect x="460" y="114" width="90" height="6" rx="3" fill="#FFFFFF"/>
+
+  <rect x="68" y="148" width="354" height="43" rx="7" fill="#F4F4F4" stroke="#DEDEDE"/>
+  <circle cx="87" cy="169" r="6" stroke="#777777" stroke-width="1.5"/>
+  <path d="m91 173 4 4" stroke="#777777" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="105" y="163" width="170" height="6" rx="3" fill="#BDBDBD"/>
+  <rect x="105" y="175" width="111" height="4" rx="2" fill="#DDDDDD"/>
+  <rect x="436" y="148" width="131" height="43" rx="7" fill="#111111"/>
+  <path d="M452 169h16M460 161v16" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="476" y="165" width="75" height="6" rx="3" fill="#FFFFFF"/>
+
+  <rect x="68" y="207" width="319" height="61" rx="7" fill="#FAFAFA" stroke="#DEDEDE"/>
+  <rect x="82" y="220" width="34" height="34" rx="6" fill="#EAEAEA"/>
+  <path d="M91 231h16v12H91zM95 227h8v4" stroke="#111111" stroke-width="1.4" stroke-linejoin="round"/>
+  <rect x="128" y="219" width="136" height="6" rx="3" fill="#222222"/>
+  <rect x="128" y="232" width="102" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="128" y="244" width="82" height="4" rx="2" fill="#DDDDDD"/>
+  <rect x="304" y="219" width="67" height="20" rx="5" fill="#EEEEEE"/>
+  <rect x="314" y="227" width="47" height="4" rx="2" fill="#777777"/>
+
+  <rect x="68" y="280" width="319" height="61" rx="7" fill="#FAFAFA" stroke="#DEDEDE"/>
+  <rect x="82" y="293" width="34" height="34" rx="6" fill="#EAEAEA"/>
+  <path d="M91 304h16v12H91zM95 300h8v4" stroke="#111111" stroke-width="1.4" stroke-linejoin="round"/>
+  <rect x="128" y="292" width="149" height="6" rx="3" fill="#222222"/>
+  <rect x="128" y="305" width="112" height="5" rx="2.5" fill="#BDBDBD"/>
+  <rect x="128" y="317" width="91" height="4" rx="2" fill="#DDDDDD"/>
+  <rect x="304" y="293" width="67" height="20" rx="5" fill="#EEEEEE"/>
+  <rect x="314" y="301" width="47" height="4" rx="2" fill="#777777"/>
+
+  <rect x="402" y="207" width="165" height="134" rx="7" fill="#F7F7F7" stroke="#DEDEDE"/>
+  <rect x="418" y="222" width="101" height="6" rx="3" fill="#222222"/>
+  <rect x="418" y="238" width="133" height="5" rx="2.5" fill="#C8C8C8"/>
+  <rect x="418" y="250" width="113" height="5" rx="2.5" fill="#C8C8C8"/>
+  <path d="M418 272H551" stroke="#DEDEDE"/>
+  <circle cx="427" cy="291" r="8" fill="#E5E5E5"/>
+  <path d="m423 291 3 3 5-6" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="443" y="288" width="93" height="5" rx="2.5" fill="#AFAFAF"/>
+  <circle cx="427" cy="316" r="8" fill="#E5E5E5"/>
+  <path d="m423 316 3 3 5-6" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="443" y="313" width="80" height="5" rx="2.5" fill="#AFAFAF"/>
+</svg>
