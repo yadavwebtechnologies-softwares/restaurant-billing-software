@@ -343,7 +343,7 @@ li + li {
 
 .site-brand-name {
   color: var(--color-black);
-  font-size: 14px;
+  font-size: 22px;
   font-weight: 750;
   line-height: 1.3;
   overflow-wrap: anywhere;
@@ -351,7 +351,7 @@ li + li {
 
 .site-brand-tagline {
   color: var(--color-muted);
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -1568,14 +1568,6 @@ html.js-enabled [data-reveal] {
     width: 37px;
     height: 37px;
     flex-basis: 37px;
-  }
-
-  .site-brand-name {
-    font-size: 12px;
-  }
-
-  .site-brand-tagline {
-    font-size: 9px;
   }
 
   .menu-btn {
