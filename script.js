@@ -296,3 +296,110 @@ if (document.readyState === "loading") {
 } else {
   initializeWebsite();
 }
+
+
+/* YWT — Lightweight Restaurant Promo */
+
+(() => {
+  "use strict";
+
+  const KEY = "ywt_restaurant_promo_shown";
+  const DELAY = 10000;
+
+  const BANNER =
+    "https://yadavwebtechnologies-softwares.github.io/yadavwebtechnologies/assets/projects/restaurant-billing-promo.svg";
+
+  const WHATSAPP =
+    "https://wa.me/917896579939?text=" +
+    encodeURIComponent(
+      "Hello Yadav Web Technologies, I am interested in your Restaurant Billing and Invoice Software. Please share the features, pricing, and demo details."
+    );
+
+  let shown;
+
+  try {
+    shown = sessionStorage.getItem(KEY);
+  } catch {
+    return;
+  }
+
+  if (shown) return;
+
+  function showPromo() {
+    try {
+      if (sessionStorage.getItem(KEY)) return;
+      sessionStorage.setItem(KEY, "1");
+    } catch {
+      return;
+    }
+
+    const style = document.createElement("style");
+    style.textContent = `
+      .ywt-promo{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:16px;background:#000a;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease}
+      .ywt-promo.open{opacity:1;visibility:visible}
+      .ywt-promo-card{position:relative;width:min(680px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:12px;transform:translateY(10px) scale(.99);transition:transform .35s ease}
+      .ywt-promo.open .ywt-promo-card{transform:translateY(0) scale(1)}
+      .ywt-promo a{display:block;line-height:0}
+      .ywt-promo img{display:block;width:100%;height:auto;max-height:85vh;object-fit:contain}
+      .ywt-promo button{position:absolute;top:8px;right:8px;z-index:1;width:38px;height:38px;display:grid;place-items:center;padding:0;border:1px solid #ccc;border-radius:50%;background:#fff;color:#000;cursor:pointer}
+      @media(max-width:480px){.ywt-promo{padding:10px}.ywt-promo-card{max-height:85vh}}
+      @media(prefers-reduced-motion:reduce){.ywt-promo,.ywt-promo-card{transition:none}.ywt-promo-card{transform:none}}
+    `;
+    document.head.appendChild(style);
+
+    const overlay = document.createElement("div");
+    overlay.className = "ywt-promo";
+    overlay.innerHTML = `
+      <div class="ywt-promo-card" role="dialog" aria-modal="true" aria-label="Restaurant Billing Software promotion">
+        <a href="${WHATSAPP}" target="_blank" rel="noopener noreferrer" aria-label="Enquire on WhatsApp">
+          <img src="${BANNER}" alt="Restaurant Billing and Invoice Software" decoding="async">
+        </a>
+        <button type="button" aria-label="Close popup">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <path d="M6 6L18 18M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    const close = () => {
+      overlay.classList.remove("open");
+      setTimeout(() => {
+        overlay.remove();
+        style.remove();
+      }, 350);
+      document.removeEventListener("keydown", onKey);
+    };
+
+    const onKey = e => {
+      if (e.key === "Escape") close();
+    };
+
+    overlay.querySelector("button").addEventListener("click", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      close();
+    });
+
+    overlay.addEventListener("click", e => {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener("keydown", onKey);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => overlay.classList.add("open"));
+    });
+  }
+
+  // Schedule only after the document is ready.
+  const schedule = () => setTimeout(showPromo, DELAY);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", schedule, { once: true });
+  } else {
+    schedule();
+  }
+})();
