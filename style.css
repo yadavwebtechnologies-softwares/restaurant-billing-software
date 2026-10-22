@@ -251,8 +251,10 @@ li + li {
   width: 100%;
   max-width: var(--container-width);
   margin-inline: auto;
-  padding-inline: 30px;
+  padding-inline: clamp(14px, 2.2vw, 30px);
+  min-width: 0;
 }
+
 
 .section {
   padding-block: 76px;
